@@ -1,11 +1,14 @@
 import './App.css'
+import HeroSection from './components/HeroSection'
+import Navbar from './components/Navbar'
 
 function App() {
 
   return (
     <>
       <div>
-        <h1 className='text-3xl text-center font-extrabold'>Here is new app</h1>
+        <Navbar/>
+        <HeroSection/>
       </div>
     </>
   )
