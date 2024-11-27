@@ -4,6 +4,7 @@ import AnalyticsSection from './components/AnalyticsSection'
 import HeroSection from './components/HeroSection'
 import Navbar from './components/Navbar'
 import OurVision from './components/OurVision'
+import TestimonialSection from './components/TestimonialSection'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Ads/>
         <AnalyticsSection/>
         <OurVision/>
+        <TestimonialSection/>
       </div>
     </>
   )

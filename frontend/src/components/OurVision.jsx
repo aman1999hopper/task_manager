@@ -18,10 +18,7 @@ const OurVision = () => {
             Our Vision
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            Our vision is to create a brighter future through innovation and
-            technology. We aim to empower individuals and organizations to
-            achieve their fullest potential by providing them with the tools and
-            insights needed to succeed in the modern world.
+          Our vision is to revolutionize stock market analysis by providing users with the tools, data, and insights needed to make smarter, more profitable investment decisions.
           </p>
         </div>
       </div>
