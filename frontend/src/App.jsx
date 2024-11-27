@@ -1,4 +1,5 @@
 import './App.css'
+import AboutUsSection from './components/AboutUs'
 import Ads from './components/Ads'
 import AnalyticsSection from './components/AnalyticsSection'
 import HeroSection from './components/HeroSection'
@@ -17,6 +18,7 @@ function App() {
         <AnalyticsSection/>
         <OurVision/>
         <TestimonialSection/>
+        <AboutUsSection/>
       </div>
     </>
   )
