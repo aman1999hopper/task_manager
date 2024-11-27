@@ -9,7 +9,7 @@ const ScrollableAds = () => {
   ];
 
   return (
-    <div className="w-full border border-gray-300 p-4 bg-white dark:bg-gray-900 rounded">
+    <div className="w-full  border-gray-300 p-4 bg-white dark:bg-gray-900 ">
       <h2 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">
         Sponsored Ads
       </h2>
