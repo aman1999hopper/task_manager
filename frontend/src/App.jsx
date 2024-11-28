@@ -2,6 +2,8 @@ import './App.css'
 import AboutUsSection from './components/AboutUs'
 import Ads from './components/Ads'
 import AnalyticsSection from './components/AnalyticsSection'
+import ContactUsSection from './components/ContactUs'
+import Footer from './components/Footer'
 import HeroSection from './components/HeroSection'
 import Navbar from './components/Navbar'
 import OurVision from './components/OurVision'
@@ -19,6 +21,8 @@ function App() {
         <OurVision/>
         <TestimonialSection/>
         <AboutUsSection/>
+        <ContactUsSection/>
+        <Footer/>
       </div>
     </>
   )
