@@ -11,18 +11,26 @@ import TestimonialSection from './components/TestimonialSection'
 
 function App() {
 
+  const sections = [
+    { Component: HeroSection, id: 'hero' },
+    { Component: Ads, id: 'ads' },
+    { Component: AnalyticsSection, id: 'analytics' },
+    { Component: OurVision, id: 'ourVision' },
+    { Component: TestimonialSection, id: 'testimonial' },
+    { Component: AboutUsSection, id: 'aboutUs' },
+    { Component: ContactUsSection, id: 'contactUs' },
+  ];
+
   return (
     <>
       <div>
-        <Navbar/>
-        <HeroSection/>
-        <Ads/>
-        <AnalyticsSection/>
-        <OurVision/>
-        <TestimonialSection/>
-        <AboutUsSection/>
-        <ContactUsSection/>
-        <Footer/>
+        <Navbar />
+        {sections.map(({ Component, id }) => (
+          <div key={id}>
+            <Component />
+          </div>
+        ))}
+        <Footer />
       </div>
     </>
   )
