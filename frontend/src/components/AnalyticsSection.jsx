@@ -2,7 +2,7 @@ import { FaChartLine, FaDollarSign, FaTools } from 'react-icons/fa';
 
 const AnalyticsSection = () => {
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 py-16">
+    <section id='services' className="bg-gray-50 dark:bg-gray-900 py-16">
       <div className="max-w-screen-xl mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
           Unlock Advanced Stock Analytics

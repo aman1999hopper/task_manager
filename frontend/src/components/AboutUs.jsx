@@ -1,6 +1,6 @@
 const AboutUsSection = () => {
     return (
-      <section  className="bg-gray-50 dark:bg-gray-900 py-16">
+      <section id="aboutUs" className="bg-gray-50 dark:bg-gray-900 py-16">
         <div className="max-w-screen-xl mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start gap-12">
           {/* Image Section */}
           <div className="lg:w-1/2 w-full relative">

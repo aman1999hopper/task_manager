@@ -1,6 +1,6 @@
 const ContactUsSection = () => {
     return (
-      <section  className="bg-gray-50 dark:bg-gray-900 py-16">
+      <section id="contactUs" className="bg-gray-50 dark:bg-gray-900 py-16">
         <div className="max-w-screen-xl mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start gap-12">
           {/* Contact Information Section */}
           <div className="lg:w-1/2 w-full text-center lg:text-left">
