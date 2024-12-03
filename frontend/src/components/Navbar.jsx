@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "../components/LoginSignupModal/LoginSignupModal"; // Import the Modal component
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,38 +69,41 @@ const Navbar = () => {
           id="navbar-sticky"
         >
           <ul className="flex flex-col p-1 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
+            <Link>
               <button
                 onClick={() => handleScroll("home")} // Scroll to Home section
                 className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
               >
                 Home
               </button>
-            </li>
-            <li>
+            </Link>
+            <Link>
               <button
                 onClick={() => handleScroll("aboutUs")} // Scroll to About section
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 About
               </button>
-            </li>
-            <li>
+            </Link>
+            <Link>
               <button
                 onClick={() => handleScroll("services")} // Scroll to Services section
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Services
               </button>
-            </li>
-            <li>
+            </Link>
+            <Link>
               <button
                 onClick={() => handleScroll("contactUs")} // Scroll to Contact section
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Contact
               </button>
-            </li>
+            </Link>
+            <Link to="/dashboard" className="text-white" >
+              Dashboard
+            </Link>
           </ul>
 
           {/* Get Started Button for Small Screens */}
