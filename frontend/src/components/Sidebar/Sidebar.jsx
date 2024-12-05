@@ -1,10 +1,20 @@
+import {
+  FaChartPie,
+  FaUserTie,
+  FaClipboardList,
+  FaChartBar,
+  FaHistory,
+} from "react-icons/fa";
+import { RiDashboardLine } from "react-icons/ri";
 
 const Sidebar = () => {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
       <aside className="fixed top-0 left-0 z-40 w-56 h-full pt-4 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-      <span className="bg-gradient-to-r from-blue-500 to-rose-600 text-transparent bg-clip-text text-xl font-bold ml-3">StockHaven</span>
+        <span className="bg-gradient-to-r from-blue-500 to-rose-600 text-transparent bg-clip-text text-xl font-bold ml-3">
+          StockHaven
+        </span>
         <div className="h-full px-3 pb-4 overflow-y-auto pt-4">
           {/* Sidebar Links */}
           <ul className="space-y-2 font-medium">
@@ -13,49 +23,53 @@ const Sidebar = () => {
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-                </svg>
+                <RiDashboardLine className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" />
                 <span className="ml-3">Dashboard</span>
               </a>
             </li>
-
             <li>
               <a
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-                </svg>
-                <span className="ml-3">Settings</span>
+                <FaChartPie className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" />
+                <span className="ml-3">Portfolio</span>
               </a>
             </li>
-
             <li>
               <a
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M3 2a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V4a2 2 0 00-2-2H3zm14 14H3V4h14v12z"></path>
-                </svg>
-                <span className="ml-3">Messages</span>
+                <FaClipboardList className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" />
+                <span className="ml-3">WatchList</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FaChartBar className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" />
+                <span className="ml-3">Market Overview</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FaUserTie className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" />
+                <span className="ml-3">Transactions</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FaHistory className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" />
+                <span className="ml-3">Reports & Analytics</span>
               </a>
             </li>
           </ul>
@@ -65,7 +79,36 @@ const Sidebar = () => {
       {/* Main Content Area */}
       <div className="flex-1 pl-56">
         {/* Navbar */}
-        <nav className="bg-white shadow-md p-4 flex justify-end items-center fixed w-10/12">
+        {/* Navbar */}
+        <nav className="bg-white shadow-md p-4 flex justify-between items-center fixed w-10/12">
+          <div className="relative w-1/2">
+            {/* Search Icon */}
+            <span className="absolute inset-y-0 left-3 flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-4.35-4.35M9 15a6 6 0 1112 0 6 6 0 01-12 0z"
+                />
+              </svg>
+            </span>
+
+            {/* Search Input */}
+            <input
+              type="search"
+              className="w-full p-2 pl-10 border border-gray-300 rounded-md focus:outline-none"
+              placeholder="Search for stocks & more..."
+              aria-label="Search"
+            />
+          </div>
+
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-700">John Doe</span>
             <span className="text-xs text-gray-500">Admin</span>
@@ -80,7 +123,10 @@ const Sidebar = () => {
         {/* Main Content */}
         <div className="p-16 overflow-y-auto mt-4">
           <h1 className="text-3xl">Main Content</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit debitis explicabo placeat fuga non dicta architecto voluptatum, sed quam reiciendis illo, ipsam dolores in laudantium expedita velit recusandae, fugiat nostrum eligendi magnam. Inventore sapiente nulla modi ut velit doloremque quae rem ipsum sunt fugiat. Quae maiores necessitatibus eveniet non perferendis harum aliquid vitae voluptatem velit commodi! Suscipit voluptatem a beatae similique excepturi fugit rem, distinctio nihil nostrum cumque. Alias qui id ipsum ipsa nesciunt, sint cupiditate possimus similique, harum veritatis vero enim optio fugiat laudantium nam suscipit molestias quaerat eaque fugit distinctio. Nihil incidunt pariatur iure impedit obcaecati deleniti beatae reiciendis explicabo ipsam repellat, aut distinctio et dicta doloremque dolor, esse ut possimus. Officia itaque aspernatur eligendi provident veritatis, harum repudiandae accusamus voluptatum laborum explicabo sunt doloribus vitae quibusdam. Totam doloribus iure sunt, autem quod architecto delectus veritatis dolor. Itaque praesentium quibusdam nostrum quisquam. Voluptatum omnis reiciendis tenetur dolore fugiat saepe ipsa! Optio doloremque esse recusandae ea tempore mollitia fugiat aliquam? Error, mollitia accusantium veniam tempora explicabo earum optio eum quod cumque doloremque sequi reprehenderit fugit pariatur ab aspernatur facilis sapiente iusto ipsam soluta facere repudiandae. Minus recusandae eligendi provident, eum, error dolores voluptatum, distinctio nostrum dolorum ab cupiditate harum sed non cumque corporis magni illum ut laudantium enim quasi perspiciatis nobis! Mollitia sint aut officia suscipit excepturi vitae quasi. Ducimus, quod! Adipisci, labore dignissimos error qui repellendus veniam blanditiis aspernatur suscipit quibusdam inventore, libero velit alias eligendi saepe tempore ullam, in repudiandae laborum enim beatae rerum iure minima voluptatibus id. Nostrum hic, officiis ab minima tempora suscipit vitae delectus beatae nesciunt voluptas cupiditate veritatis labore consectetur porro? Doloremque beatae laborum a qui corrupti repellendus itaque alias ipsa est? Doloremque laudantium porro corrupti dolorem aperiam dolore alias perferendis voluptatum dolorum esse labore molestiae hic et suscipit, illum temporibus a nisi! Quo omnis laboriosam vel debitis quam aperiam earum, atque tempora aliquam hic cupiditate blanditiis dolorum dolore tenetur veritatis ipsum error nulla aut provident doloremque architecto repudiandae magnam eos! Incidunt corporis a rem ratione ab dolorem, cum tempora omnis molestias, repellendus eaque aut soluta! Repudiandae, quas fugiat magni quos rerum nulla earum odio voluptates eligendi laboriosam quisquam! Rerum maxime corporis velit minima, consequuntur praesentium quod aliquam quos quisquam molestiae, quam odio suscipit obcaecati beatae delectus repellat accusamus quae fuga excepturi inventore autem explicabo voluptate incidunt enim. Odit repellendus ex ratione fuga cupiditate repellat nobis cum optio architecto rerum perspiciatis ullam consequuntur ut porro, consequatur doloremque voluptatibus iure sapiente harum in veniam nesciunt! Tenetur deleniti quibusdam ut commodi amet ipsam beatae iste necessitatibus quasi. Provident deleniti vero sed, vel esse numquam culpa blanditiis veritatis doloremque iste qui soluta quae eveniet dicta sapiente nostrum, labore voluptas officia quaerat, quisquam cum ad ullam molestias! Doloribus quaerat, rem ratione deleniti excepturi amet assumenda quis. Tempore architecto temporibus laboriosam magnam rerum consequatur, praesentium fugiat culpa ipsam dolor reiciendis inventore, vel saepe molestiae porro eum eveniet quaerat ullam asperiores minus? Soluta asperiores quasi voluptatem placeat, beatae sapiente voluptates sed, necessitatibus, adipisci deleniti incidunt impedit a possimus blanditiis.</p>
+          <p>
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum tempore nihil delectus rerum qui, eaque a provident natus quibusdam eius nam ut recusandae unde. Itaque voluptatem illum, quas mollitia facilis quod distinctio eius? Reiciendis eveniet laudantium omnis distinctio alias numquam libero quisquam. Eos placeat dolores, molestias dolorem modi perspiciatis animi nostrum commodi a tempore maxime aperiam nisi iste harum, corporis at? Et temporibus dolores aliquam at praesentium rerum quo atque autem natus corporis accusantium saepe vel aut nam iste esse non sunt id neque, ex nostrum reiciendis eaque ratione delectus? Fugiat adipisci voluptatibus, vitae voluptates exercitationem ea. Velit, ab et!
+          </p>
+          <h1 className="text-2xl font-bold text-red-600 mt-8  ">This is the overview of my site, and this is the heading for that </h1>
         </div>
       </div>
     </div>
