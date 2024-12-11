@@ -13,6 +13,11 @@ const Sidebar = () => {
       <span className="bg-gradient-to-r from-blue-500 to-rose-600 text-transparent bg-clip-text text-xl font-bold ml-3">
         StockHaven
       </span>
+      <div className="px-2 py-2">
+      <input type="Search" className="rounded text-center" placeholder="Serach eg: tcs bse etc">
+      
+      </input>
+      </div>
       <div className="h-full px-3 pb-4 overflow-y-auto pt-4">
         <ul className="space-y-2 font-medium">
           {sidebarData.map((item) => (
