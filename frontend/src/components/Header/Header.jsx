@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { FaBell } from "react-icons/fa";
-import { useState } from "react";
-const Header = () => {
 
-  const [user] = useState({
-    name: "IFC343",
-    avatar: "https://www.w3schools.com/w3images/avatar2.png", // Replace with actual image URL
-  });
+const Header = () => {
+  // Simulate user data (replace with actual API data)
+  const user = {
+    name: "John Doe",
+    avatar: "https://www.w3schools.com/w3images/avatar2.png", // Replace with a real image URL
+  };
 
   return (
     <>
@@ -65,7 +65,7 @@ const Header = () => {
           </span>
         </div>
         {/* User Deatils shows dynamically */}
-        <div className="flex items-center ml-6">
+        <div className="flex items-center ml-6 cursor-pointer">
         <img
           src={user.avatar}
           alt="User Avatar"
