@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar, toggleDropdown } from "../../redux/sidebarSlice";
 import { sidebarData } from "../../data/SidebarData.jsx";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import { IoIosArrowUp } from "react-icons/io";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Sidebar = () => {
           className="p-1 text-gray-500 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
           onClick={() => dispatch(toggleSidebar())}
         >
-          {isSidebarOpen ? <FiArrowLeft /> : <FiArrowRight />}
+          {isSidebarOpen ? <FaArrowAltCircleLeft /> : <FaArrowAltCircleRight />}
         </button>
       </div>
 
@@ -42,7 +43,7 @@ const Sidebar = () => {
           {sidebarData.map((item) => (
             <li key={item.id}>
               <div
-                className={`flex items-center justify-between p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer ${
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer ${
                   isSidebarOpen ? "justify-between" : "justify-center"
                 }`}
                 onClick={() => item.children && dispatch(toggleDropdown(item.id))}
@@ -52,7 +53,13 @@ const Sidebar = () => {
                   {isSidebarOpen && <span className="ml-3">{item.title}</span>}
                 </div>
                 {item.children && isSidebarOpen && (
-                  <span>{openDropdown === item.id ? "▲" : "▼"}</span>
+                  <span
+                    className={`transition-transform duration-300 ${
+                      openDropdown === item.id ? "rotate-180" : "rotate-0"
+                    }`}
+                  >
+                    <IoIosArrowUp />
+                  </span>
                 )}
               </div>
               {item.children && openDropdown === item.id && isSidebarOpen && (
