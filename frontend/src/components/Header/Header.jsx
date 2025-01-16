@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="header-right flex justify-end">
+      <div className="header-right flex justify-end p-3">
         {/* Navigation Links */}
         <nav className="flex space-x-4 text-sm font-semibold">
           <NavLink

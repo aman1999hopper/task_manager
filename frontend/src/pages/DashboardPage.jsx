@@ -1,16 +1,18 @@
-
 import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
-
+import { Outlet } from "react-router-dom"; // Import Outlet from react-router-dom
 
 const DashboardPage = () => {
   return (
-    <>
-    <Sidebar/>
-    <div className="header-right flex-1 ml-56 p-2 bg-gray-100 ">
-      <Header />
+    <div className="flex h-screen">
+      <Sidebar />
+      <div className="flex-1 flex flex-col">
+        <Header />
+        <main className="flex-1  bg-gray-100 overflow-y-auto">
+          <Outlet /> {/* This will render the matched child route */}
+        </main>
       </div>
-    </>
+    </div>
   );
 };
 

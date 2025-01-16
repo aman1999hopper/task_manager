@@ -1,17 +1,22 @@
-import { useSelector, useDispatch } from "react-redux";
-import { toggleSidebar, toggleDropdown } from "../../redux/sidebarSlice";
-import { sidebarData } from "../../data/SidebarData.jsx";
-import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
-import { IoIosArrowUp } from "react-icons/io";
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleSidebar, } from '../../redux/sidebarSlice';
+import { sidebarData } from '../../data/SidebarData';
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import { IoIosArrowUp } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const { isSidebarOpen, openDropdown } = useSelector((state) => state.sidebar);
 
+  const handleLinkClick = () => {
+    dispatch(toggleSidebar());
+  };
+
   return (
     <aside
       className={`fixed top-0 left-0 z-40 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 transition-all duration-300 ${
-        isSidebarOpen ? "w-56" : "w-16"
+        isSidebarOpen ? 'w-56' : 'w-16'
       }`}
     >
       <div className="flex items-center justify-between p-4">
@@ -42,11 +47,10 @@ const Sidebar = () => {
         <ul className="space-y-2 font-medium">
           {sidebarData.map((item) => (
             <li key={item.id}>
-              <div
-                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer ${
-                  isSidebarOpen ? "justify-between" : "justify-center"
-                }`}
-                onClick={() => item.children && dispatch(toggleDropdown(item.id))}
+              <Link
+                to={item.link}
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={handleLinkClick} // Close sidebar on link click
               >
                 <div className="flex items-center">
                   {item.icon}
@@ -55,23 +59,24 @@ const Sidebar = () => {
                 {item.children && isSidebarOpen && (
                   <span
                     className={`transition-transform duration-300 ${
-                      openDropdown === item.id ? "rotate-180" : "rotate-0"
+                      openDropdown === item.id ? 'rotate-180' : 'rotate-0'
                     }`}
                   >
                     <IoIosArrowUp />
                   </span>
                 )}
-              </div>
+              </Link>
               {item.children && openDropdown === item.id && isSidebarOpen && (
                 <ul className="ml-6 space-y-1">
                   {item.children.map((child) => (
                     <li key={child.id}>
-                      <a
-                        href={child.link}
+                      <Link
+                        to={child.link}
                         className="flex items-center p-2 text-gray-700 rounded-lg dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600"
+                        onClick={handleLinkClick} // Close sidebar on link click
                       >
                         {child.title}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
