@@ -1,6 +1,7 @@
 import { FaArrowDown, FaArrowUp, FaBoxOpen, FaShoppingCart, FaTruck } from "react-icons/fa";
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import LineChartCard from "../../components/LinerChart/LineChartCard";
 
 const OverviewPage = () => {
     const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
@@ -28,6 +29,12 @@ const OverviewPage = () => {
       icon: <FaTruck className="w-8 h-8 text-purple-500" />,
     }
   ];
+
+  const chartData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    values: [65, 59, 80, 81, 56, 55, 40],
+  };
+
 
   return (
     <div className={`p-4 transition-all duration-300 ${isSidebarOpen ? 'pl-64' : 'pl-24'}`}>
@@ -64,6 +71,11 @@ const OverviewPage = () => {
             </div>
           </div>
         ))}
+        <LineChartCard
+        data={chartData}
+        title="Revenue Over Time"
+        percentage={19.6}
+        />
       </div>
     </div>
   );
