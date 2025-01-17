@@ -38,8 +38,8 @@ const LineChartCard = ({ data, title, percentage }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 mt-5">
-      <h3 className="text-lg font-bold mb-2">{title}</h3>
+    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 mt-5">
+      <h3 className="text-lg dark:text-white font-bold mb-2">{title}</h3>
       <div className="h-48">
         <Bar data={chartData} options={options} />
       </div>
@@ -47,7 +47,7 @@ const LineChartCard = ({ data, title, percentage }) => {
         <span className={`font-medium ${percentage > 0 ? 'text-green-500' : 'text-red-500'}`}>
           {percentage > 0 ? `+${percentage}%` : `${percentage}%`}
         </span>
-        <span className="text-gray-500 ml-1">Revenue</span>
+        <span className="text-gray-500 dark:text-white ml-1">Revenue</span>
       </div>
     </div>
   );

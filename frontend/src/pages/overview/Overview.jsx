@@ -77,11 +77,11 @@ const OverviewPage = () => {
         {stats.map((stat) => (
           <div
             key={stat.id}
-            className="bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
+            className="bg-white dark:bg-gray-800 dark:text-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
           >
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-gray-500 mb-1">{stat.title}</p>
+                <p className="text-gray-500 dark:text-gray-100 mb-1">{stat.title}</p>
                 <h3 className="text-2xl font-bold">
                   ${stat.amount.toLocaleString()}
                 </h3>
