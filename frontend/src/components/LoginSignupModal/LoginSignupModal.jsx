@@ -14,7 +14,7 @@ const LoginSignupModal = ({ onClose }) => {
         {/* Close button positioned at the top-right corner */}
         <button
           onClick={onClose}  // Close modal
-          className="absolute top-2 right-5 text-white hover:text-red-700 text-xl font-bold"
+          className="absolute top-2 right-5 text-red-500 text-xl font-bold"
         >
           &times;
         </button>
