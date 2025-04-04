@@ -30,7 +30,7 @@ const LoginSignupModal = ({ onClose }) => {
         localStorage.setItem("token", data.token);
         toast.success("Login successful");
         setTimeout(() => {
-          window.location.href = "/dashboard";  // Redirect after a delay
+          window.location.href = "/dashboard"; // Redirect after a delay
         }, 1500);
       } else {
         alert(data.message);
@@ -41,10 +41,7 @@ const LoginSignupModal = ({ onClose }) => {
   };
 
   const handleSignup = async (event) => {
-    event.preventDefault(); // Prevent default form submission
-    // Implement signup logic similar to login
-    // You might have a separate API endpoint for registration
-    // e.g., POST to http://localhost:5000/api/auth/register
+    event.preventDefault();
     try {
       const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
@@ -53,14 +50,18 @@ const LoginSignupModal = ({ onClose }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        localStorage.setItem("token", data.token);
-        alert("Signup successful");
-        window.location.href = "/dashboard";  // Redirect to dashboard
+        toast.success("Signup successful! Please login.");
+        // Clear the form fields
+        setName("");
+        setEmail("");
+        setPassword("");
+        // Switch to login form
+        setIsLogin(true);
       } else {
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch {
-      alert("Error during signup");
+      toast.error("Error during signup");
     }
   };
 
@@ -80,11 +81,10 @@ const LoginSignupModal = ({ onClose }) => {
         </h2>
 
         <div className="text-center mb-4">
-          <button
-            className="text-blue-500"
-            onClick={switchForm}
-          >
-            {isLogin ? "Need an account? Sign Up" : "Already have an account? Log In"}
+          <button className="text-blue-500" onClick={switchForm}>
+            {isLogin
+              ? "Need an account? Sign Up"
+              : "Already have an account? Log In"}
           </button>
         </div>
 
@@ -92,7 +92,12 @@ const LoginSignupModal = ({ onClose }) => {
           {isLogin ? (
             <form onSubmit={handleLogin}>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-white">Email</label>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-white"
+                >
+                  Email
+                </label>
                 <input
                   type="email"
                   id="email"
@@ -103,7 +108,12 @@ const LoginSignupModal = ({ onClose }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="password" className="block text-sm font-medium text-white">Password</label>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-white"
+                >
+                  Password
+                </label>
                 <input
                   type="password"
                   id="password"
@@ -113,14 +123,22 @@ const LoginSignupModal = ({ onClose }) => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg">
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded-lg"
+              >
                 Log In
               </button>
             </form>
           ) : (
             <form onSubmit={handleSignup}>
               <div className="mb-4">
-                <label htmlFor="name" className="block text-sm font-medium text-white">Full Name</label>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-white"
+                >
+                  Full Name
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -131,7 +149,12 @@ const LoginSignupModal = ({ onClose }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-white">Email</label>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-white"
+                >
+                  Email
+                </label>
                 <input
                   type="email"
                   id="email"
@@ -142,7 +165,12 @@ const LoginSignupModal = ({ onClose }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="password" className="block text-sm font-medium text-white">Password</label>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-white"
+                >
+                  Password
+                </label>
                 <input
                   type="password"
                   id="password"
@@ -152,7 +180,10 @@ const LoginSignupModal = ({ onClose }) => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg">
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded-lg"
+              >
                 Sign Up
               </button>
             </form>

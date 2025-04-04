@@ -5,14 +5,40 @@ import { FaBell, FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);  // Simulate user data (replace with actual API data)
+  const [user, setUser] = useState({
+    name: "",
+    avatar: "https://www.w3schools.com/w3images/avatar2.png", // Default avatar
+  });
   const navigate = useNavigate();
 
-  // Simulate user data (replace with actual API data)
-  const user = {
-    name: "John Doe",
-    avatar: "https://www.w3schools.com/w3images/avatar2.png", // Replace with a real image URL
-  };
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  useEffect(() => {
+    // Get user data from localStorage
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch('http://localhost:5000/api/auth/user', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.user) {
+          setUser({
+            name: data.user.name,
+            avatar: data.user.avatar || "https://www.w3schools.com/w3images/avatar2.png"
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+    }
+  }, []);
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard" },
@@ -31,9 +57,13 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // Implement logout functionality here
-    alert("Are you sure you want to logout?");
-    navigate("/"); // Redirect to login page after logout
+    // Clear user data and token
+    localStorage.removeItem('token');
+    setUser({
+      name: "",
+      avatar: "https://www.w3schools.com/w3images/avatar2.png"
+    });
+    navigate("/");
   }
 
   useEffect(() => {
@@ -86,7 +116,7 @@ const Header = () => {
               className="w-8 h-8 rounded-full border-2 border-gray-200 dark:border-gray-600"
             />
             <span className="ml-2 text-gray-800 dark:text-gray-200">
-              {user.name}
+               {user.name || 'Guest'}
             </span>
             {isOpen && (
               <div className="absolute top-12 right-0 w-40 bg-white dark:bg-gray-800 shadow-lg rounded-md">
