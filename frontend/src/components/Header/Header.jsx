@@ -75,7 +75,7 @@ const Header = () => {
   }, [isDarkMode]);
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center">
+    <header className="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center ml-auto w-[70%]">
       <div className="flex items-center">
         <button
           className="text-gray-800 dark:text-gray-200 md:hidden"
