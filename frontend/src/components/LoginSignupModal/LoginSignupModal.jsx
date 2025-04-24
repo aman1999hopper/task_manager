@@ -76,7 +76,7 @@ const LoginSignupModal = ({ onClose }) => {
           &times;
         </button>
 
-        <h2 className="text-center text-2xl font-semibold mb-4 text-white">
+        <h2 className="text-center text-2xl font-semibold mb-4 dark:text-white text-gray-900">
           {isLogin ? "Login" : "Sign Up"}
         </h2>
 
