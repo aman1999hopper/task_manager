@@ -75,7 +75,7 @@ const Header = () => {
   }, [isDarkMode]);
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center ml-auto w-[70%]">
+    <header className="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center">
       <div className="flex items-center">
         <button
           className="text-gray-800 dark:text-gray-200 md:hidden"
@@ -83,6 +83,7 @@ const Header = () => {
         >
           {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
+        
       </div>
       <div className={`md:flex ${isMenuOpen ? "block" : "hidden"} md:block`}>
         <nav className="flex flex-col md:flex-row md:space-x-4 text-sm font-semibold items-center mr-6">
