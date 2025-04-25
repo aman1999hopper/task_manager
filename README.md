@@ -31,8 +31,8 @@
 
 ## 📸 Screenshots
 
-### Dashboard
-![Dashboard](./frontend/src/assets/homepage.png)
+### LandingPage
+![LandingPage](./frontend/src/assets/homepage.png)
 
 ### Portfolio View
 ![Portfolio](./screenshots/portfolio.png)
