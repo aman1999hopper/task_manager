@@ -34,8 +34,8 @@
 ### LandingPage
 ![LandingPage](./frontend/src/assets/homepage.png)
 
-### Portfolio View
-![Portfolio](./screenshots/portfolio.png)
+### Dashboard Page
+![DashBoard](./frontend/src/assets/dashboard.png)
 
 ### Mobile Responsive
 ![Mobile View](./screenshots/mobile.png)
