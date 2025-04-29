@@ -9,8 +9,9 @@ const sidebarSlice = createSlice({
   name: "sidebar",
   initialState,
   reducers: {
-    toggleSidebar(state) {
-      state.isSidebarOpen = !state.isSidebarOpen;
+    toggleSidebar(state, action) {
+      // If action.payload is provided, use it; otherwise toggle the current state
+      state.isSidebarOpen = action.payload !== undefined ? action.payload : !state.isSidebarOpen;
     },
     toggleDropdown(state, action) {
       state.openDropdown = state.openDropdown === action.payload ? null : action.payload;

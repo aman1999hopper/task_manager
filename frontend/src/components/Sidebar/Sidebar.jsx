@@ -13,7 +13,7 @@ const Sidebar = () => {
     <aside
       className={`fixed top-0 left-0 z-40 h-full bg-white border-r border-gray-200 
         dark:bg-gray-800 dark:border-gray-700 transition-all duration-300 
-        hover:w-56 ${isSidebarOpen ? 'w-56' : 'w-16'}`}
+        w-${isSidebarOpen ? '56' : '16'}`}   // Removed hover:w-56
       onMouseEnter={() => dispatch(toggleSidebar(true))}
       onMouseLeave={() => dispatch(toggleSidebar(false))}
     >
