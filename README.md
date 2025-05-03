@@ -1,8 +1,8 @@
-# stock_app
+# Task_manager_app
 
-# StockHaven - Stock Market Dashboard
+# Taskify
 
-![StockHaven Dashboard](./screenshots/dashboard.png)
+![Task Dashboard](./screenshots/dashboard.png)
 
 ## 🚀 Features
 
@@ -11,7 +11,7 @@
 - 📱 Responsive design
 - 🔐 User authentication
 - 📈 Portfolio tracking
-- 🔍 Stock search functionality
+- 🔍 Task search functionality
 - 📋 Watchlist management
 
 ## 💻 Tech Stack
@@ -22,6 +22,7 @@
   - Tailwind CSS
   - React Router
   - React Icons
+  - lucid Icons
 
 - Backend:
   - Node.js
