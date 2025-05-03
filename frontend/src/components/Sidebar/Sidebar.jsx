@@ -21,20 +21,10 @@ const Sidebar = () => {
         <span className={`bg-gradient-to-r from-blue-500 to-rose-600 
           text-transparent bg-clip-text text-xl font-bold 
           transition-opacity duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0'}`}>
-          StockHaven
+          Taskify
         </span>
       </div>
-
-      <div className="px-2 py-2">
-        {isSidebarOpen && (
-          <input
-            type="search"
-            className="w-full p-2 text-center rounded"
-            placeholder="Search eg: tcs bse etc"
-          />
-        )}
-      </div>
-
+      
       <div className="h-full px-3 pb-4 overflow-y-auto pt-4 scrollbar-hide">
         <ul className="space-y-2 font-medium">
           {sidebarData.map((item) => (
