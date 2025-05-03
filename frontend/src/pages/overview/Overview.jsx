@@ -21,24 +21,31 @@ const OverviewPage = () => {
   const stats = [
     {
       id: 1,
-      title: "Orders",
-      amount: 13420,
+      title: "Total Tasks",
+      amount: 5,
       percentageChange: 12.5,
       icon: <FaShoppingCart className="w-8 h-8 text-blue-500" />,
     },
     {
       id: 2,
-      title: "Items Sold",
-      amount: 8432,
+      title: "Pending Tasks",
+      amount: 3,
       percentageChange: -2.4,
       icon: <FaBoxOpen className="w-8 h-8 text-green-500" />,
     },
     {
       id: 3,
-      title: "Shipping",
-      amount: 6234,
+      title: "In Progress",
+      amount: 4,
       percentageChange: 8.2,
       icon: <FaTruck className="w-8 h-8 text-purple-500" />,
+    },
+    {
+      id: 4,
+      title: "Completed Tasks",
+      amount: 2,
+      percentageChange: 19.6,
+      icon: <FaArrowUp className="w-8 h-8 text-red-500" />,
     },
   ];
 
@@ -48,7 +55,7 @@ const OverviewPage = () => {
   };
 
   const pieChartData = {
-    labels: ['Electronics', 'Clothing', 'Home Appliances'],
+    labels: ['Pending', 'In Progress', 'Completed'],
     values: [50, 25, 25],
   };
   
@@ -73,7 +80,7 @@ const OverviewPage = () => {
       <h1 className="text-2xl font-bold ">Hii, {user.name}</h1>
       <p className="text-gray-500 mt-4 mb-8">Take a monthly overview</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
         {stats.map((stat) => (
           <div
             key={stat.id}
@@ -83,7 +90,7 @@ const OverviewPage = () => {
               <div>
                 <p className="text-gray-500 dark:text-gray-100 mb-1">{stat.title}</p>
                 <h3 className="text-2xl font-bold">
-                  ${stat.amount.toLocaleString()}
+                  {stat.amount.toLocaleString()}
                 </h3>
               </div>
               {stat.icon}
@@ -111,14 +118,14 @@ const OverviewPage = () => {
         <div className="flex-1 min-w-[300px] md:w-3/5">
           <LineChartCard
             data={chartData}
-            title="Revenue Over Time"
+            title="Task Priority Levels"
             percentage={19.6}
           />
         </div>
         <div className="flex-1 min-w-[300px] md:w-2/5">
           <PieChart
             data={pieChartData}
-            title="Product Share"
+            title="Task Distribution"
           />
         </div>
       </div>

@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 const TopProductsCard = ({ data }) => {
   return (
     <div className="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 w-full mt-6">
-      <h3 className="text-lg font-bold mb-4">Top Products</h3>
+      <h3 className="text-lg font-bold mb-4">Recent Tasks</h3>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white">
           <thead>
             <tr className="bg-purple-400 dark:bg-sky-600 text-left">
               <th className="py-2 px-4 border-b border-gray-200">Sr. No</th>
-              <th className="py-2 px-4 border-b border-gray-200">Product Name</th>
-              <th className="py-2 px-4 border-b border-gray-200">Price</th>
-              <th className="py-2 px-4 border-b border-gray-200">Last Trade Price</th>
-              <th className="py-2 px-4 border-b border-gray-200">Revenue</th>
+              <th className="py-2 px-4 border-b border-gray-200">Name</th>
+              <th className="py-2 px-4 border-b border-gray-200">Status</th>
+              <th className="py-2 px-4 border-b border-gray-200">Priority</th>
+              <th className="py-2 px-4 border-b border-gray-200">Created On</th>
             </tr>
           </thead>
           <tbody>
