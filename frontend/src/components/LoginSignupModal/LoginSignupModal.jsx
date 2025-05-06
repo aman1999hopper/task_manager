@@ -1,12 +1,18 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
+import { setUser } from "../../redux/authReducer";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LoginSignupModal = ({ onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState(""); // For signup form
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const switchForm = () => {
     setIsLogin(!isLogin);
@@ -17,7 +23,7 @@ const LoginSignupModal = ({ onClose }) => {
   };
 
   const handleLogin = async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
@@ -25,18 +31,21 @@ const LoginSignupModal = ({ onClose }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
       const data = await response.json();
       if (response.ok) {
-        localStorage.setItem("token", data.token);
+        dispatch(setUser(data.user)); // ✅ FIXED: use data.user
+        localStorage.setItem("token", data.token); // Optional
         toast.success("Login successful");
         setTimeout(() => {
-          window.location.href = "/dashboard"; // Redirect after a delay
+          navigate("/dashboard");
         }, 1500);
       } else {
-        alert(data.message);
+        toast.error(data.message || "Login failed");
       }
-    } catch {
+    } catch (error) {
       toast.error("Error during login");
+      console.error(error);
     }
   };
 

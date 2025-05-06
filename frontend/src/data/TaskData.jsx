@@ -45,6 +45,51 @@ const taskData = [
         { name: "Eve", avatar: "/images/user5.jpg" },
       ],
     },
+    {
+      id: 4,
+      title: "Tested app",
+      description: "Tested the app on different devices.",
+      status: "Pending",
+      priority: "High",
+      completedTasks: 2,
+      totalTasks: 5,
+      startDate: "2025-04-28",
+      dueDate: "2025-04-30",
+      assignees: [
+        { name: "Rohit", avatar: "/images/user4.jpg" },
+        { name: "Sumit", avatar: "/images/user5.jpg" },
+      ],
+    },
+    {
+      id: 5,
+      title: "UI/UX Design",
+      description: "Design the user interface for the dashboard page.",
+      status: "In Progress",
+      priority: "Low",
+      completedTasks: 2,
+      totalTasks: 3,
+      startDate: "2025-04-28",
+      dueDate: "2025-04-30",
+      assignees: [
+        { name: "Mohit", avatar: "/images/user4.jpg" },
+        { name: "Tarun", avatar: "/images/user5.jpg" },
+      ],
+    },
+    {
+      id: 6,
+      title: "Build backend",
+      description: "Set up Node.js API and connect to MongoDB.",
+      status: "Completed",
+      priority: "Low",
+      completedTasks: 3,
+      totalTasks: 3,
+      startDate: "2025-04-28",
+      dueDate: "2025-04-30",
+      assignees: [
+        { name: "Sam", avatar: "/images/user4.jpg" },
+        { name: "Jam", avatar: "/images/user5.jpg" },
+      ],
+    },
   ];
   
   export default taskData;

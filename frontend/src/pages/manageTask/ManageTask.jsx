@@ -13,6 +13,15 @@ const ManageTask = ({ tasks }) => {
     activeTab === "All" ? true : task.status === activeTab
   );
 
+  const statusCounts = tasks.reduce(
+    (acc, task) => {
+      acc[task.status] = (acc[task.status] || 0) + 1;
+      acc.All += 1;
+      return acc;
+    },
+    { All: 0 }
+  );
+
   return (
     <div
       className={`p-4 transition-all duration-300 ${
@@ -27,13 +36,16 @@ const ManageTask = ({ tasks }) => {
           <button
             key={status}
             onClick={() => setActiveTab(status)}
-            className={`relative pb-2 px-3 font-medium ${
+            className={`relative pb-2 px-3 font-medium flex items-center space-x-3 ${
               activeTab === status
                 ? "text-blue-600 after:absolute after:left-0 after:bottom-0 after:h-1 after:w-full after:bg-blue-600"
                 : "text-gray-500 hover:text-blue-600"
             }`}
           >
-            {status}
+            <span>{status}</span>
+            <span className="text-xs bg-gray-200 text-gray-700 px-1.5 py-0.5 rounded-full">
+              {statusCounts[status] || 0}
+            </span>
           </button>
         ))}
       </div>
