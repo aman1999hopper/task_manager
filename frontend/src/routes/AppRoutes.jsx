@@ -5,6 +5,7 @@ import OverviewPage from '../pages/overview/Overview.jsx';
 import OTP from '../pages/otpvalid/OtpRead.jsx';
 import ManageTask from '../pages/manageTask/ManageTask.jsx';
 import taskData from '../data/TaskData.jsx';
+import CreateTaskPage from '../pages/createTask/createTaskPage.jsx';
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Route path="/dashboard" element={<DashboardPage />}>
         <Route path="overview" element={<OverviewPage />} />
         <Route path="task" element={<ManageTask tasks={taskData}/>} />
+        <Route path='createTask' element={<CreateTaskPage/>} />
         <Route path="otp" element={<OTP/>} />
         {/* Add other nested routes here */}
       </Route>

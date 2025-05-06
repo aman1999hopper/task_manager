@@ -23,7 +23,7 @@ export const sidebarData = [
     id: 3,
     title: "Create Tasks",
     icon: <ClipboardList className="w-5 h-5 text-gray-700 group-hover:text-black dark:text-gray-400 dark:group-hover:text-white" />,
-    link: "#",
+    link: "createTask",
   },
   {
     id: 4,
