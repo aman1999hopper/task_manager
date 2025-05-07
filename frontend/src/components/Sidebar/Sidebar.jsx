@@ -11,7 +11,7 @@ const Sidebar = () => {
 
   return (
     <aside
-    className={`fixed top-0 left-0 z-40 h-full pt-16 bg-white border-r border-gray-200 
+    className={`fixed top-0 left-0 z-40 h-full pt-20 bg-white border-r border-gray-200 
       dark:bg-gray-800 dark:border-gray-700 transition-all duration-300 
       w-${isSidebarOpen ? "56" : "16"}`}
       onMouseEnter={() => dispatch(toggleSidebar(true))}
