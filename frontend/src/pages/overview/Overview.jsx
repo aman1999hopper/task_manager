@@ -10,12 +10,12 @@ import { useSelector } from "react-redux";
 import LineChartCard from "../../components/Cards/LineChartCard";
 import PieChart from "../../components/Cards/PiChart";
 import TopProductsCard from "../../components/Cards/TopProductsCard";
+import useUser from "../../hooks/useUser";
 
 const OverviewPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
   // Sample data - replace with actual API data
-   const user = useSelector((state) => state.auth.user);
-   console.log("Login response:", user);
+  const user = useUser();
 
   const stats = [
     {
@@ -76,7 +76,7 @@ const OverviewPage = () => {
         isSidebarOpen ? "pl-64" : "pl-24"
       }`}
     >
-      <h1 className="text-2xl font-bold ">Hi, {user?.name || "Guest"}</h1>
+      <h1 className="text-2xl font-bold ">Hii, {user?.name || "Guest"}</h1>
       <p className="text-gray-500 mt-4 mb-8">Take a monthly overview</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">

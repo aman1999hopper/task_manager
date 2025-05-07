@@ -1,8 +1,9 @@
-const express = require("express");
-const connectDB = require("./config/db");
-const cors = require("cors");
-const authRoutes = require("./routes/authRoutes");
-require("dotenv").config();
+import express from "express";
+import connectDB from "./config/db.js";
+import cors from "cors";
+import authRoutes from "./routes/authRoutes.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 connectDB();

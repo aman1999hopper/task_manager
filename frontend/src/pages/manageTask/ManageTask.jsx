@@ -24,7 +24,7 @@ const ManageTask = ({ tasks }) => {
 
   return (
     <div
-      className={`p-4 transition-all duration-300 ${
+      className={`p-4 transition-all duration-300 pt-20 ${
         isSidebarOpen ? "pl-64" : "pl-24"
       }`}
     >

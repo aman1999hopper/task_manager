@@ -3,10 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: {
-    name: 'John Doe',
-    role: 'Admin',
-    email: 'john.doe@example.com',
-    avatar: 'https://i.pravatar.cc/100', // sample avatar
+    name: '',
+    email: '',
+    role: '',
+    avatar: '' // sample avatar
   }
 };
 
