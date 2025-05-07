@@ -34,12 +34,7 @@ const LoginSignupModal = ({ onClose }) => {
 
       const data = await response.json();
       if (response.ok) {
-        dispatch(setUser({
-          name: data.user.name,
-          email: data.user.email,
-          role: data.user.role,
-          avatar: data.user.avatar
-        })); // ✅ FIXED: use data.user
+        dispatch(setUser(data.user)); // ✅ FIXED: use data.user
         localStorage.setItem("token", data.token); // Optional
         toast.success("Login successful");
         setTimeout(() => {
