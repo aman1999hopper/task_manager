@@ -89,7 +89,7 @@ const Header = () => {
             </span>
 
             {isOpen && (
-              <div className="absolute top-12 right-0 w-40 bg-white dark:bg-gray-800 shadow-lg rounded-md">
+              <div className="absolute top-8 right-0 w-40 bg-white dark:bg-gray-800 shadow-lg rounded-md">
                 <ul className="text-gray-800 dark:text-gray-200">
                   <li className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Settings</li>
                   <li className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">My Stocks</li>
