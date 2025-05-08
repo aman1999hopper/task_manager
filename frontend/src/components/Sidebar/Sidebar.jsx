@@ -7,7 +7,7 @@ import { IoIosArrowUp } from "react-icons/io";
 const Sidebar = () => {
   const dispatch = useDispatch();
   const { isSidebarOpen, openDropdown } = useSelector((state) => state.sidebar);
-  const { name, email, role, avatar } = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <aside
@@ -73,20 +73,20 @@ const Sidebar = () => {
       <div className="absolute bottom-0 left-0 w-full px-4 py-3 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center space-x-3">
           <img
-            src={avatar}
+            src={user?.avatar || "https://via.placeholder.com/150"}
             alt="User Avatar"
             className="w-10 h-10 rounded-full object-cover border dark:border-gray-600"
           />
           {isSidebarOpen && (
             <div className="overflow-hidden">
               <p className="text-sm font-semibold text-gray-900 dark:text-white truncate w-36">
-                {name}
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 truncate w-36">
-                {role}
+                {user?.name || "Guest"} 
               </p>
               <p className="text-xs text-gray-400 dark:text-gray-500 truncate w-36">
-                {email}
+                {user?.role || "User"}
+              </p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 truncate w-36">
+                {user?.email || "random"}
               </p>
             </div>
           )}

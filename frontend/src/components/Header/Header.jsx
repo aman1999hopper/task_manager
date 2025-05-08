@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaBell, FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
-import useUser from "../../hooks/useUser";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const user = useUser(); //  Custom hook handles fetching user data
+  const user = useSelector((state) => state.auth.user); //  Custom hook handles fetching user data
   const navigate = useNavigate();
 
   const menuItems = [

@@ -10,12 +10,11 @@ import { useSelector } from "react-redux";
 import LineChartCard from "../../components/Cards/LineChartCard";
 import PieChart from "../../components/Cards/PiChart";
 import TopProductsCard from "../../components/Cards/TopProductsCard";
-import useUser from "../../hooks/useUser";
 
 const OverviewPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
   // Sample data - replace with actual API data
-  const user = useUser();
+  const user = useSelector((state) => state.auth.user);
 
   const stats = [
     {

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { setUser } from "../../redux/authReducer";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { loginUser, registerUser } from "../../api/auth.js"; // Adjust the import path as necessary
 
 const LoginSignupModal = ({ onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -24,27 +25,18 @@ const LoginSignupModal = ({ onClose }) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        dispatch(setUser(data.user)); // ✅ FIXED: use data.user
-        localStorage.setItem("token", data.token); // Optional
-        toast.success("Login successful");
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 1500);
-      } else {
-        toast.error(data.message || "Login failed");
-      }
+      const data = await loginUser(email, password);
+      console.log("Login data:", data);
+      dispatch(setUser(data.user));
+      localStorage.setItem("token", data.token); // optional
+      toast.success("Login successful");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1500);
     } catch (error) {
-      toast.error("Error during login");
+      const message = error.response?.data?.message || "Login failed";
+      toast.error(message);
       console.error(error);
     }
   };
@@ -52,25 +44,14 @@ const LoginSignupModal = ({ onClose }) => {
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        toast.success("Signup successful! Please login.");
-        // Clear the form fields
-        setName("");
-        setEmail("");
-        setPassword("");
-        // Switch to login form
-        setIsLogin(true);
-      } else {
-        toast.error(data.message);
-      }
-    } catch {
-      toast.error("Error during signup");
+      const data = await registerUser(name, email, password); // call axios helper
+      toast.success(data.message || "Signup successful! Please login.");
+      setName("");
+      setEmail("");
+      setPassword("");
+      setIsLogin(true);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Signup failed");
     }
   };
 
