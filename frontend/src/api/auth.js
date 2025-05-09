@@ -5,10 +5,23 @@ export const loginUser = async (email, password) => {
   return res.data;
 };
 
-export const registerUser = async (name, email, password) => {
-  const res = await api.post("/auth/register", { name, email, password });
-  return res.data;
-};
+export const registerUser = async (name, email, password, avatar) => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    if (avatar) {
+      formData.append("avatar", avatar);
+    }
+  
+    const res = await api.post("/auth/register", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  
+    return res.data;
+  };
 
 export const getUser = async () => {
   const token = localStorage.getItem("token");

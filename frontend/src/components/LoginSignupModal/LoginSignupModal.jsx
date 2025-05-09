@@ -11,6 +11,7 @@ const LoginSignupModal = ({ onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState(""); // For signup form
+  const [avatar, setUserimage] = useState(null); // For signup form
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const LoginSignupModal = ({ onClose }) => {
     setEmail("");
     setPassword("");
     setName("");
+    setUserimage(null);
   };
 
   const handleLogin = async (event) => {
@@ -44,11 +46,12 @@ const LoginSignupModal = ({ onClose }) => {
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
-      const data = await registerUser(name, email, password); // call axios helper
+      const data = await registerUser(name, email, password, avatar); // call axios helper
       toast.success(data.message || "Signup successful! Please login.");
       setName("");
       setEmail("");
       setPassword("");
+      setUserimage(null);
       setIsLogin(true);
     } catch (error) {
       toast.error(error.response?.data?.message || "Signup failed");
@@ -122,6 +125,21 @@ const LoginSignupModal = ({ onClose }) => {
             </form>
           ) : (
             <form onSubmit={handleSignup}>
+              <div className="mb-4">
+                <label
+                  htmlFor="avatar"
+                  className="block text-sm font-medium text-white"
+                >
+                  Profile Picture
+                </label>
+                <input
+                  type="file"
+                  id="avatar"
+                  accept="image/*"
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black"
+                  onChange={(e) => setUserimage(e.target.files[0])}
+                />
+              </div>
               <div className="mb-4">
                 <label
                   htmlFor="name"

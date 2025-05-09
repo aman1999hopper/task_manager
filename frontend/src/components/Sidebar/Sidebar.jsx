@@ -83,7 +83,7 @@ const Sidebar = () => {
                 {user?.name || "Guest"} 
               </p>
               <p className="text-xs text-gray-400 dark:text-gray-500 truncate w-36">
-                {user?.role || "User"}
+                {user?.role || "test"}
               </p>
               <p className="text-xs text-gray-400 dark:text-gray-500 truncate w-36">
                 {user?.email || "random"}

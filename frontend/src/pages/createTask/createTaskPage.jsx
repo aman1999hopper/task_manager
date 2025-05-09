@@ -1,11 +1,20 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { Trash2 } from "lucide-react";
 
 const CreateTaskPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMembers, setSelectedMembers] = useState([]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [checklistInput, setChecklistInput] = useState("");
+  const [checklist, setChecklist] = useState([]);
+  const [attachments, setAttachments] = useState([""]);
 
   const members = [
     { id: 1, name: "Alice", email: "alice@example.com" },
@@ -19,6 +28,42 @@ const CreateTaskPage = () => {
     setSelectedMembers((prev) =>
       prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id]
     );
+  };
+
+  const handleAddChecklist = () => {
+    if (checklistInput.trim()) {
+      setChecklist([...checklist, checklistInput.trim()]);
+      setChecklistInput("");
+    }
+  };
+
+  const handleDeleteChecklist = (index) => {
+    const updatedList = checklist.filter((_, idx) => idx !== index);
+    setChecklist(updatedList);
+  };
+
+  const handleAttachmentChange = (index, value) => {
+    const updatedAttachments = [...attachments];
+    updatedAttachments[index] = value;
+    setAttachments(updatedAttachments);
+  };
+
+  const addAttachmentField = () => {
+    setAttachments([...attachments, ""]);
+  };
+
+  const handleCreateTask = () => {
+    const taskData = {
+      title,
+      description,
+      priority,
+      dueDate,
+      assignedTo: selectedMembers,
+      checklist,
+      attachments,
+    };
+    toast.success("Task created successfully!", taskData);
+    // Add your logic to save taskData (e.g., API call or dispatch action)
   };
 
   return (
@@ -36,6 +81,8 @@ const CreateTaskPage = () => {
         </label>
         <input
           type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           placeholder="Task Title"
           className="border border-gray-300 rounded-lg p-2 w-2/3"
         />
@@ -48,19 +95,25 @@ const CreateTaskPage = () => {
         </label>
         <input
           type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
           className="border border-gray-300 rounded-lg p-2 h-10 w-2/3"
         />
       </div>
 
-      {/* Priority, Due Date, Assign To - Flex Row */}
-      <div className="flex flex-col sm:flex-row gap-6">
+      {/* Priority, Due Date, Assign To */}
+      <div className="flex flex-col sm:flex-row gap-6 mb-6">
         {/* Priority */}
         <div className="flex-1">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Priority
           </label>
-          <select className="border border-gray-300 rounded-lg p-2 w-full">
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+            className="border border-gray-300 rounded-lg p-2 w-full"
+          >
             <option value="">Select priority</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
@@ -75,6 +128,8 @@ const CreateTaskPage = () => {
           </label>
           <input
             type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
             className="border border-gray-300 rounded-lg p-2 w-full"
           />
         </div>
@@ -91,8 +146,6 @@ const CreateTaskPage = () => {
             >
               Add Member
             </button>
-
-            {/* Avatar Icons */}
             <div className="flex gap-2">
               {selectedMembers.slice(0, 3).map((id) => {
                 const member = members.find((m) => m.id === id);
@@ -110,8 +163,6 @@ const CreateTaskPage = () => {
                   </div>
                 );
               })}
-
-              {/* Show the "+X" if there are more than 3 selected members */}
               {selectedMembers.length > 3 && (
                 <div className="w-8 h-8 rounded-full bg-gray-300 text-gray-800 flex items-center justify-center text-sm font-semibold">
                   +{selectedMembers.length - 3}
@@ -157,6 +208,83 @@ const CreateTaskPage = () => {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Checklist */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Todo-Checklist
+        </label>
+        <div className="flex gap-4 items-center">
+          <input
+            type="text"
+            value={checklistInput}
+            onChange={(e) => setChecklistInput(e.target.value)}
+            placeholder="Enter checklist item"
+            className="border border-gray-300 rounded-lg p-2 w-2/3"
+          />
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={handleAddChecklist}
+          >
+            + Add Task
+          </button>
+        </div>
+        <ul className="mt-4 w-2/3 space-y-3">
+          {checklist.map((item, idx) => (
+            <li
+              key={idx}
+              className="flex justify-between items-center bg-gray-200 rounded-lg p-3 shadow-sm"
+            >
+              <span className="font-semibold text-gray-800">
+                {`${(idx + 1).toString().padStart(2, "0")}.`} {item}
+              </span>
+              <button
+                onClick={() => handleDeleteChecklist(idx)}
+                className="text-red-500 hover:text-red-700"
+                aria-label="Delete"
+              >
+                <Trash2 className="w-5 h-5" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Attachments */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Add Attachments
+        </label>
+        {attachments.map((attachment, index) => (
+          <input
+            key={index}
+            type="text"
+            value={attachment}
+            onChange={(e) => handleAttachmentChange(index, e.target.value)}
+            placeholder="Attachment URL"
+            className="border border-gray-300 rounded-lg p-2 w-2/3 mb-2"
+          />
+        ))}
+        <button
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ml-2"
+            onClick={addAttachmentField}
+          >
+            + Add More
+          </button>
+      </div>
+
+      {/* Buttons */}
+      <div className="flex justify-center gap-4 mt-6">
+        <button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+          Cancel
+        </button>
+        <button
+          onClick={handleCreateTask}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Create Task
+        </button>
       </div>
     </div>
   );
