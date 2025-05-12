@@ -1,34 +1,57 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchTasks as fetchTasksAPI } from './tasksAPI';
+import { createTaskAPI, getTasksAPI } from '../../api/task.js';
 
-// Async Thunk
-export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () => {
-  const response = await fetchTasksAPI();
-  return response.data;
+export const createTask = createAsyncThunk('tasks/create', async (taskData, thunkAPI) => {
+  try {
+    const response = await createTaskAPI(taskData);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || 'Create failed');
+  }
 });
 
-const tasksSlice = createSlice({
+export const getTasks = createAsyncThunk('tasks/getAll', async (_, thunkAPI) => {
+  try {
+    const response = await getTasksAPI();
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || 'Fetch failed');
+  }
+});
+
+const taskSlice = createSlice({
   name: 'tasks',
   initialState: {
-    items: [],
-    status: 'idle', // idle | loading | succeeded | failed
+    taskList: [],
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTasks.pending, (state) => {
-        state.status = 'loading';
+      .addCase(createTask.pending, (state) => {
+        state.loading = true;
       })
-      .addCase(fetchTasks.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.items = action.payload;
+      .addCase(createTask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.taskList.push(action.payload);
       })
-      .addCase(fetchTasks.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
+      .addCase(createTask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(getTasks.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getTasks.fulfilled, (state, action) => {
+        state.loading = false;
+        state.taskList = action.payload;
+      })
+      .addCase(getTasks.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export default tasksSlice.reducer;
+export default taskSlice.reducer;

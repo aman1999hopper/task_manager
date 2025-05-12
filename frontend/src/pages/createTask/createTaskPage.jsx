@@ -1,11 +1,12 @@
 import { useState } from "react";
+// import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { Trash2 } from "lucide-react";
+import { createTaskAPI } from "../../api/task";
 
 const CreateTaskPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [title, setTitle] = useState("");
@@ -30,6 +31,8 @@ const CreateTaskPage = () => {
     );
   };
 
+  // const dispatch = useDispatch();
+
   const handleAddChecklist = () => {
     if (checklistInput.trim()) {
       setChecklist([...checklist, checklistInput.trim()]);
@@ -52,19 +55,38 @@ const CreateTaskPage = () => {
     setAttachments([...attachments, ""]);
   };
 
-  const handleCreateTask = () => {
-    const taskData = {
-      title,
-      description,
-      priority,
-      dueDate,
-      assignedTo: selectedMembers,
-      checklist,
-      attachments,
-    };
-    toast.success("Task created successfully!", taskData);
-    // Add your logic to save taskData (e.g., API call or dispatch action)
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const newTask = {
+    title,
+    description,
+    status: "Pending", // or get from form input
+    priority, // or get from form input
+    completedTasks: 0,
+    totalTasks: 5,
+    startDate: new Date(),
+    dueDate: new Date("2025-06-01"), // optional
+    assignees: [
+      { name: "Alice", avatar: "/images/user1.jpg" },
+      { name: "Bob", avatar: "/images/user2.jpg" },
+    ],
   };
+
+  try {
+    const { data } = await createTaskAPI(newTask);
+    console.log("Task created:", data);
+    alert(data.message || "Task created successfully");
+
+    // Clear the form
+    setTitle("");
+    setDescription("");
+    // Clear any other state variables if needed
+  } catch (err) {
+    console.error("Error creating task:", err.response?.data?.message || err.message);
+    alert(err.response?.data?.message || "Failed to create task");
+  }
+};
 
   return (
     <div
@@ -267,11 +289,11 @@ const CreateTaskPage = () => {
           />
         ))}
         <button
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ml-2"
-            onClick={addAttachmentField}
-          >
-            + Add More
-          </button>
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ml-2"
+          onClick={addAttachmentField}
+        >
+          + Add More
+        </button>
       </div>
 
       {/* Buttons */}
@@ -280,7 +302,7 @@ const CreateTaskPage = () => {
           Cancel
         </button>
         <button
-          onClick={handleCreateTask}
+          onClick={handleSubmit}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Create Task

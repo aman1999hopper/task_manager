@@ -16,7 +16,7 @@ export const registerUser = async (name, email, password, avatar) => {
   
     const res = await api.post("/auth/register", formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     });
   

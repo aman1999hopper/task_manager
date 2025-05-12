@@ -1,13 +1,21 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 
-const ManageTask = ({ tasks }) => {
+const ManageTask = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+  const [tasks, setTasks] = useState([]);
   const [activeTab, setActiveTab] = useState("All");
 
   const statuses = ["All", "Pending", "In Progress", "Completed"];
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/tasks")
+      .then((res) => setTasks(res.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   const filteredTasks = tasks.filter((task) =>
     activeTab === "All" ? true : task.status === activeTab
@@ -24,7 +32,7 @@ const ManageTask = ({ tasks }) => {
 
   return (
     <div
-      className={`p-4 transition-all duration-300  ${
+      className={`p-4 transition-all duration-300 ${
         isSidebarOpen ? "pl-64" : "pl-24"
       }`}
     >
@@ -58,7 +66,7 @@ const ManageTask = ({ tasks }) => {
               key={task.id}
               className="p-4 border rounded-xl bg-white shadow space-y-3 dark:bg-gray-800 dark:text-white"
             >
-              {/* Title & Chips */}
+              {/* Status & Priority Chips */}
               <div className="flex items-end space-x-2">
                 <span className="px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded-full">
                   {task.status}
@@ -77,7 +85,7 @@ const ManageTask = ({ tasks }) => {
                 </div>
               </div>
 
-              {/* Task Progress */}
+              {/* Progress */}
               <div className="text-sm text-gray-600 dark:text-white">
                 Task done: {task.completedTasks}/{task.totalTasks}
               </div>
@@ -97,7 +105,7 @@ const ManageTask = ({ tasks }) => {
               </div>
 
               {/* Assignees */}
-              <div className="flex  mt-2 items-center">
+              <div className="flex mt-2 items-center">
                 {task.assignees.slice(0, 3).map((user, index) => (
                   <Avatar
                     key={index}
@@ -140,28 +148,6 @@ const ManageTask = ({ tasks }) => {
       </ul>
     </div>
   );
-};
-
-ManageTask.propTypes = {
-  tasks: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      status: PropTypes.string.isRequired,
-      priority: PropTypes.string.isRequired,
-      completedTasks: PropTypes.number.isRequired,
-      totalTasks: PropTypes.number.isRequired,
-      startDate: PropTypes.string.isRequired,
-      dueDate: PropTypes.string.isRequired,
-      assignees: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          avatar: PropTypes.string.isRequired,
-        })
-      ).isRequired,
-    })
-  ).isRequired,
 };
 
 export default ManageTask;

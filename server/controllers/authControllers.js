@@ -4,6 +4,7 @@ import User from "../models/User.js";
 
 export const registerUser = async (req, res) => {
   try {
+    console.log("requessttt ",req.body);
     const { name, email, password } = req.body;
 
     // Check for missing fields

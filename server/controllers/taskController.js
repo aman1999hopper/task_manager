@@ -1,7 +1,7 @@
 import Task from "../models/Task.js";
 
 // Get all tasks
-export const getAllTasks = async (req, res) => {
+export const getTasks = async (req, res) => {
   try {
     const tasks = await Task.find();
     res.json(tasks);
@@ -11,15 +11,12 @@ export const getAllTasks = async (req, res) => {
 };
 
 // Seed tasks (for testing)
-export const seedTasks = async (req, res) => {
-  try {
-    await Task.deleteMany();
-
-    const sampleTasks = [/* paste your taskData array here */];
-
-    await Task.insertMany(sampleTasks);
-    res.status(201).json({ message: "Sample tasks seeded." });
+export const createTask = async (req, res) => {
+   try {
+    const { title, description,status, priority, completedTasks, totalTasks, startDate, dueDate, assignees } = req.body;
+    const task = await Task.create({ title, description, status, priority, completedTasks, totalTasks, startDate, dueDate, assignees });
+    res.status(201).json({ message: "Task created successfully", task });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: "Failed to create task" });
   }
 };
