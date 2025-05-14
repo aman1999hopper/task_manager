@@ -1,9 +1,9 @@
 import { useState } from "react";
 // import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-// import { toast } from "react-toastify";
 import { Trash2 } from "lucide-react";
 import { createTaskAPI } from "../../api/task";
+import { toast } from "react-toastify";
 
 const CreateTaskPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
@@ -11,6 +11,7 @@ const CreateTaskPage = () => {
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [setAssignees] = useState([]);
   const [priority, setPriority] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [checklistInput, setChecklistInput] = useState("");
@@ -64,27 +65,29 @@ const CreateTaskPage = () => {
     status: "Pending", // or get from form input
     priority, // or get from form input
     completedTasks: 0,
-    totalTasks: 5,
+    totalTasks: checklist.length,
     startDate: new Date(),
-    dueDate: new Date("2025-06-01"), // optional
-    assignees: [
-      { name: "Alice", avatar: "/images/user1.jpg" },
-      { name: "Bob", avatar: "/images/user2.jpg" },
-    ],
+    dueDate: dueDate ? new Date(dueDate) : null,
+    assignees: selectedMembers,
   };
 
-  try {
+   try {
     const { data } = await createTaskAPI(newTask);
     console.log("Task created:", data);
-    alert(data.message || "Task created successfully");
+    toast.success(data.message || "Task created successfully");
 
-    // Clear the form
+    // Clear form
     setTitle("");
     setDescription("");
-    // Clear any other state variables if needed
+    setPriority("");
+    setDueDate("");
+    setAssignees([]);
+    setSelectedMembers([]);
+    setChecklist([]);
+    setChecklistInput("");
+    setAttachments([""]);
   } catch (err) {
-    console.error("Error creating task:", err.response?.data?.message || err.message);
-    alert(err.response?.data?.message || "Failed to create task");
+    console.error("Error creating task:", err);
   }
 };
 
