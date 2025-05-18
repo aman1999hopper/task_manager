@@ -11,14 +11,19 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
-    setUser(state, action) {
-      state.user = action.payload;
+    setUser: (state, action) => {
+      const { name, email, id } = action.payload;
+      state.name = name;
+      state.email = email;
+      state.id = id;
     },
-    clearUser(state) {
-      state.user = {};
+    logout: (state) => {
+      state.name = null;
+      state.email = null;
+      state.id = null;
     },
   },
 });

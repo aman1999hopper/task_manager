@@ -8,6 +8,7 @@ const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.auth.user); //  Custom hook handles fetching user data
+  console.log("Header - User from Redux:", user);
   const navigate = useNavigate();
 
   const menuItems = [

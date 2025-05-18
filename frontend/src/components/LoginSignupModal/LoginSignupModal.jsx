@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import { setUser } from "../../redux/authReducer";
+import { setUser } from "../../redux/authSlice.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser, registerUser } from "../../api/auth.js"; // Adjust the import path as necessary
@@ -30,7 +30,7 @@ const LoginSignupModal = ({ onClose }) => {
     try {
       const data = await loginUser(email, password);
       console.log("Login data:", data);
-      dispatch(setUser(data.user));
+      dispatch(setUser({ user: data.user, token: data.token }));
       localStorage.setItem("token", data.token); // optional
       toast.success("Login successful");
       setTimeout(() => {

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import sidebarReducer from "./sidebarSlice";
 import themeReducer from "../features/Theme/Theme.js"
-import authReducer from "./authReducer.js"
+import authReducer from "./authSlice.js"
 import userReducer from "./userSlice.js"
 import taskReducer from "../features/tasks/taskSlice.js"
 

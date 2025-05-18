@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import Avatar from "@mui/material/Avatar";
+import { getTasksAPI } from "../../api/task";
 
 const ManageTask = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
@@ -11,10 +11,13 @@ const ManageTask = () => {
   const statuses = ["All", "Pending", "In Progress", "Completed"];
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/tasks")
+    // Get tasks using the API utility
+    getTasksAPI()
       .then((res) => setTasks(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        // Handle unauthorized error - you might want to redirect to login
+      });
   }, []);
 
   const filteredTasks = tasks.filter((task) =>
@@ -106,24 +109,25 @@ const ManageTask = () => {
 
               {/* Assignees */}
               <div className="flex mt-2 items-center">
-                {task.assignees.slice(0, 3).map((user, index) => (
-                  <Avatar
-                    key={index}
-                    alt={user.name}
-                    src={user.avatar}
-                    title={user.name}
-                    sx={{
-                      width: 32,
-                      height: 32,
-                      border: "2px solid white",
-                      marginLeft: index !== 0 ? "-8px" : "0",
-                      zIndex: task.assignees.length - index,
-                      fontSize: "0.75rem",
-                    }}
-                  />
-                ))}
+                {task.assignees &&
+                  task.assignees.slice(0, 3).map((user, index) => (
+                    <Avatar
+                      key={index}
+                      alt={user.name}
+                      src={user.avatar}
+                      title={user.name}
+                      sx={{
+                        width: 32,
+                        height: 32,
+                        border: "2px solid white",
+                        marginLeft: index !== 0 ? "-8px" : "0",
+                        zIndex: task.assignees.length - index,
+                        fontSize: "0.75rem",
+                      }}
+                    />
+                  ))}
 
-                {task.assignees.length > 3 && (
+                {task.assignees && task.assignees.length > 3 && (
                   <Avatar
                     sx={{
                       width: 32,

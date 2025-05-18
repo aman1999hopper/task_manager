@@ -11,7 +11,6 @@ const CreateTaskPage = () => {
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [setAssignees] = useState([]);
   const [priority, setPriority] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [checklistInput, setChecklistInput] = useState("");
@@ -62,12 +61,11 @@ const CreateTaskPage = () => {
   const newTask = {
     title,
     description,
-    status: "Pending", // or get from form input
     priority, // or get from form input
     completedTasks: 0,
     totalTasks: checklist.length,
     startDate: new Date(),
-    dueDate: dueDate ? new Date(dueDate) : null,
+    dueDate:  dueDate ? new Date(dueDate) : null,
     assignees: selectedMembers,
   };
 
@@ -81,7 +79,6 @@ const CreateTaskPage = () => {
     setDescription("");
     setPriority("");
     setDueDate("");
-    setAssignees([]);
     setSelectedMembers([]);
     setChecklist([]);
     setChecklistInput("");
@@ -305,6 +302,7 @@ const CreateTaskPage = () => {
           Cancel
         </button>
         <button
+          type="submit"
           onClick={handleSubmit}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
