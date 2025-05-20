@@ -12,6 +12,7 @@ const CreateTaskPage = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
+  const [status, setStatus] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [checklistInput, setChecklistInput] = useState("");
   const [checklist, setChecklist] = useState([]);
@@ -56,37 +57,39 @@ const CreateTaskPage = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const newTask = {
-    title,
-    description,
-    priority, // or get from form input
-    completedTasks: 0,
-    totalTasks: checklist.length,
-    startDate: new Date(),
-    dueDate:  dueDate ? new Date(dueDate) : null,
-    assignees: selectedMembers,
+    const newTask = {
+      title,
+      description,
+      priority, // or get from form input
+      status,
+      completedTasks: 0,
+      totalTasks: checklist.length,
+      startDate: new Date(),
+      dueDate: dueDate ? new Date(dueDate) : null,
+      assignees: selectedMembers,
+    };
+
+    try {
+      const { data } = await createTaskAPI(newTask);
+      console.log("Task created:", data);
+      toast.success(data.message || "Task created successfully");
+
+      // Clear form
+      setTitle("");
+      setDescription("");
+      setPriority("");
+      setDueDate("");
+      setSelectedMembers([]);
+      setStatus("");
+      setChecklist([]);
+      setChecklistInput("");
+      setAttachments([""]);
+    } catch (err) {
+      console.error("Error creating task:", err);
+    }
   };
-
-   try {
-    const { data } = await createTaskAPI(newTask);
-    console.log("Task created:", data);
-    toast.success(data.message || "Task created successfully");
-
-    // Clear form
-    setTitle("");
-    setDescription("");
-    setPriority("");
-    setDueDate("");
-    setSelectedMembers([]);
-    setChecklist([]);
-    setChecklistInput("");
-    setAttachments([""]);
-  } catch (err) {
-    console.error("Error creating task:", err);
-  }
-};
 
   return (
     <div
@@ -230,6 +233,21 @@ const CreateTaskPage = () => {
             </div>
           )}
         </div>
+      </div>
+
+      <div className="flex-1 mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Status
+        </label>
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="border border-gray-300 rounded-lg p-2 w-full"
+        >
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
       </div>
 
       {/* Checklist */}
