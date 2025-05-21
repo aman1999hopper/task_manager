@@ -72,24 +72,27 @@ const Sidebar = () => {
       {/* Bottom user section */}
       <div className="absolute bottom-0 left-0 w-full px-4 py-3 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center space-x-3">
-          <img
-            src={user?.avatar || "https://via.placeholder.com/150"}
-            alt="User Avatar"
-            className="w-10 h-10 rounded-full object-cover border dark:border-gray-600"
-          />
-          {isSidebarOpen && (
-            <div className="overflow-hidden">
-              <p className="text-sm font-semibold text-gray-900 dark:text-white truncate w-36">
-                {user?.name || "Guest"} 
-              </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 truncate w-36">
-                {user?.role || "test"}
-              </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 truncate w-36">
-                {user?.email || "random"}
-              </p>
+         {user?.avatar ? (
+            <img
+              src={user.avatar}
+              alt="User Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs">
+              {user?.name?.charAt(0) || "U"}
             </div>
           )}
+          {isSidebarOpen && (
+            <div className="flex flex-col">
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {user?.name || "User"}
+            </span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {user?.email || ""}
+            </span>
+            </div>
+         )}
         </div>
       </div>
     </aside>

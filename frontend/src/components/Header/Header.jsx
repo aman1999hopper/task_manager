@@ -79,21 +79,30 @@ const Header = () => {
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
           >
-            <img
-              src={user?.avatar}
-              alt="User Avatar"
-              className="w-8 h-8 rounded-full border-2 border-gray-200 dark:border-gray-600"
-            />
-            <span className="ml-2 text-gray-800 dark:text-gray-200">
-              {user?.name || "Guest"}
-            </span>
+            {user?.avatar ? (
+              <img
+                src={user.avatar}
+                alt="User Avatar"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs">
+                {user?.name?.charAt(0) || "U"}
+              </div>
+            )}
 
             {isOpen && (
               <div className="absolute top-8 right-0 w-40 bg-white dark:bg-gray-800 shadow-lg rounded-md">
                 <ul className="text-gray-800 dark:text-gray-200">
-                  <li className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Settings</li>
-                  <li className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">My Stocks</li>
-                  <li className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Help</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">
+                    Settings
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">
+                    My Stocks
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">
+                    Help
+                  </li>
                   <li
                     className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
                     onClick={handleLogout}
