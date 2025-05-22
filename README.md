@@ -6,7 +6,7 @@
 
 ## 🚀 Features
 
-- 📊 Real-time stock market data
+- 📊 Real-time Task data
 - 🌓 Dark/Light mode support
 - 📱 Responsive design
 - 🔐 User authentication

@@ -7,17 +7,23 @@ const ManageTask = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
   const [tasks, setTasks] = useState([]);
   const [activeTab, setActiveTab] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   const statuses = ["All", "Pending", "In Progress", "Completed"];
 
   useEffect(() => {
-    // Get tasks using the API utility
-    getTasksAPI()
-      .then((res) => setTasks(res.data))
-      .catch((err) => {
-        console.error(err);
-        // Handle unauthorized error - you might want to redirect to login
-      });
+    // Simulate delay with setTimeout
+    setTimeout(() => {
+      getTasksAPI()
+        .then((res) => {
+          setTasks(res.data);
+          setLoading(false); // 👈 Stop loader after data is loaded
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoading(false); // 👈 Still stop loader on error
+        });
+    }, 3000); // 5-second delay
   }, []);
 
   const filteredTasks = tasks.filter((task) =>
@@ -32,6 +38,18 @@ const ManageTask = () => {
     },
     { All: 0 }
   );
+
+  if (loading) {
+    // Spinner UI (can customize or use a library spinner)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <div className="loader mb-4 border-4 border-blue-500 border-t-transparent rounded-full w-16 h-16 animate-spin"></div>
+          <p className="text-gray-600">Loading tasks...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -109,8 +127,8 @@ const ManageTask = () => {
 
               {/* Assignees */}
               <div className="flex mt-2 items-center">
-                {task.assignees &&
-                  task.assignees.slice(0, 3).map((user, index) => (
+                {task.assignes &&
+                  task.assignes.slice(0, 3).map((user, index) => (
                     <Avatar
                       key={index}
                       alt={user.name}
@@ -121,13 +139,13 @@ const ManageTask = () => {
                         height: 32,
                         border: "2px solid white",
                         marginLeft: index !== 0 ? "-8px" : "0",
-                        zIndex: task.assignees.length - index,
+                        zIndex: task.assignes.length - index,
                         fontSize: "0.75rem",
                       }}
                     />
                   ))}
 
-                {task.assignees && task.assignees.length > 3 && (
+                {task.assignes && task.assignes.length > 3 && (
                   <Avatar
                     sx={{
                       width: 32,
@@ -138,7 +156,7 @@ const ManageTask = () => {
                       fontSize: "0.75rem",
                     }}
                   >
-                    +{task.assignees.length - 3}
+                    +{task.assignes.length - 3}
                   </Avatar>
                 )}
               </div>
