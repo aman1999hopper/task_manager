@@ -30,8 +30,9 @@ const LoginSignupModal = ({ onClose }) => {
     try {
       const data = await loginUser(email, password);
       console.log("Login data:", data);
-      dispatch(setUser({ user: data.user, token: data.token }));
+      dispatch(setUser({ user: data.user, token: data.token, role: data.user.role })); // optional
       localStorage.setItem("token", data.token); // optional
+      localStorage.setItem("role", data.user.role); // optional
       toast.success("Login successful");
       setTimeout(() => {
         navigate("/dashboard");

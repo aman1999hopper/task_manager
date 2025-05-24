@@ -10,7 +10,7 @@ const generateToken = (userId) => {
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     // Check for missing fields
     if (!name || !email || !password) {
@@ -39,12 +39,13 @@ export const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
       avatar: avatarUrl,
+      role: role === "admin" ? "admin" : "user",
     });
 
     await user.save();
 
     // Create token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
@@ -55,6 +56,7 @@ export const registerUser = async (req, res) => {
         name: user.name,
         email: user.email,
         avatar: user.avatar,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -78,7 +80,7 @@ export const loginUser = async (req, res) => {
   }
 
   // ✅ Create token
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+  const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 
@@ -91,6 +93,7 @@ export const loginUser = async (req, res) => {
       name: user.name,
       email: user.email,
       avatar: user.avatar,
+      role: user.role,
     },
   });
 };
@@ -106,6 +109,8 @@ export const getUser = async (req, res) => {
         id: user.id,
         name: user.name,
         email: user.email,
+        avatar: user.avatar,
+        role: user.role,
       },
     });
   } catch (err) {
@@ -144,7 +149,7 @@ export const updateUserProfile = async (req, res) => {
 
     const user = await User.findByIdAndUpdate(
       req.user,
-      { name, email, avatar: avatarUrl },
+      { name, email, avatar: avatarUrl, role: req.body.role },
       { new: true }
     ).select("-password");
 
