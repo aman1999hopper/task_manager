@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import { getTasksAPI } from "../../api/task";
 import { toast } from "react-toastify";
-import SkeletonCard from "../../components/skeletonCard";
+import SkeletonCard from "../../components/skaletonCard.jsx";
 
 const ManageTask = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
@@ -18,6 +18,7 @@ const ManageTask = () => {
     setTimeout(() => {
       getTasksAPI()
         .then((res) => {
+          console.log("Manage task......",res.data);  
           setTasks(res.data);
           setLoading(false); // 👈 Stop loader after data is loaded
         })
@@ -140,8 +141,8 @@ const ManageTask = () => {
 
               {/* Assignees */}
               <div className="flex mt-2 items-center">
-                {task.assignes &&
-                  task.assignes.slice(0, 3).map((user, index) => (
+                {task.assignedTo &&
+                  task.assignedTo.slice(0, 3).map((user, index) => (
                     <Avatar
                       key={index}
                       alt={user.name}
@@ -152,13 +153,13 @@ const ManageTask = () => {
                         height: 32,
                         border: "2px solid white",
                         marginLeft: index !== 0 ? "-8px" : "0",
-                        zIndex: task.assignes.length - index,
+                        zIndex: task.assignedTo.length - index,
                         fontSize: "0.75rem",
                       }}
                     />
                   ))}
 
-                {task.assignes && task.assignes.length > 3 && (
+                {task.assignedTo && task.assignedTo.length > 3 && (
                   <Avatar
                     sx={{
                       width: 32,
@@ -169,7 +170,7 @@ const ManageTask = () => {
                       fontSize: "0.75rem",
                     }}
                   >
-                    +{task.assignes.length - 3}
+                    +{task.assignedTo.length - 3}
                   </Avatar>
                 )}
               </div>
