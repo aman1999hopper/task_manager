@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import { getTasksAPI } from "../../api/task";
+import { toast } from "react-toastify";
+import SkeletonCard from "../../components/skeletonCard";
 
 const ManageTask = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
@@ -23,8 +25,14 @@ const ManageTask = () => {
           console.error(err);
           setLoading(false); // 👈 Still stop loader on error
         });
-    }, 3000); // 5-second delay
+    }, 5000); // 1-second delay
   }, []);
+
+  const handleDelete = (id) => {
+    const newCrads = tasks.filter((_, index) => index !== id);
+    setTasks(newCrads);
+    toast.success("Task deleted successfully");
+  };
 
   const filteredTasks = tasks.filter((task) =>
     activeTab === "All" ? true : task.status === activeTab
@@ -40,13 +48,18 @@ const ManageTask = () => {
   );
 
   if (loading) {
-    // Spinner UI (can customize or use a library spinner)
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-center">
-          <div className="loader mb-4 border-4 border-blue-500 border-t-transparent rounded-full w-16 h-16 animate-spin"></div>
-          <p className="text-gray-600">Loading tasks...</p>
-        </div>
+      <div
+        className={`p-4 transition-all duration-300 ${
+          isSidebarOpen ? "pl-64" : "pl-24"
+        }`}
+      >
+        <h1 className="text-2xl font-bold mb-4">My Tasks</h1>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </ul>
       </div>
     );
   }
@@ -159,6 +172,18 @@ const ManageTask = () => {
                     +{task.assignes.length - 3}
                   </Avatar>
                 )}
+              </div>
+              {/* Task Actions */}
+              <div className="flex justify-end space-x-2 mt-3">
+                <button className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
+                  Edit
+                </button>
+                <button
+                  className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                  onClick={handleDelete}
+                >
+                  Delete
+                </button>
               </div>
             </li>
           ))
