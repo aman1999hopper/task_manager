@@ -4,7 +4,7 @@ import User from "../models/User.js";
 
 const auth = async (req, res, next) => {
   const authHeader = req.header("Authorization");
-  console.log("Authorization Header:", authHeader);
+  // console.log("Authorization Header:", authHeader);
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ message: "No token, authorization denied" });

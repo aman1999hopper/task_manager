@@ -11,7 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { name: "Dashboard", path: "/dashboard" },
+    { name: "Dashboard", path: "/dashboard/overview" },
     { name: "Portfolio", path: "/portfolio" },
     { name: "Watchlist", path: "/watchlist" },
     { name: "Settings", path: "/settings" },
