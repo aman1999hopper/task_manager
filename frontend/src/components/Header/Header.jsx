@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaBell, FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import {
+  FaBell,
+  FaBars,
+  FaTimes,
+  FaSun,
+  FaMoon,
+  FaSearch,
+} from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const Header = () => {
@@ -49,6 +56,17 @@ const Header = () => {
 
       {/* Center: Navigation menu */}
       <div className={`md:flex ${isMenuOpen ? "block" : "hidden"} md:block`}>
+        <div className="relative w-64 hidden md:block mr-3">
+          {/* Search Icon inside */}
+          <FaSearch className="absolute left-2 -translate-y-1/2 text-gray-400 dark:text-gray-300 mt-4" />
+
+          {/* Search Input */}
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-full pl-10 p-1 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500"
+          />
+        </div>
         <nav className="flex flex-col md:flex-row md:space-x-4 text-sm font-semibold items-center mr-6">
           {menuItems.map((item) => (
             <NavLink
