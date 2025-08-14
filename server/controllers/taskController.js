@@ -43,3 +43,32 @@ export const createTask = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const getTaskStats = async (req, res) => {
+  try {
+    const userId = req.user._id; // From authMiddleware
+
+    const total = await Task.countDocuments({ user: userId });
+    const pending = await Task.countDocuments({
+      user: userId,
+      status: "Pending",
+    });
+    const inProgress = await Task.countDocuments({
+      user: userId,
+      status: "In Progress",
+    });
+    const completed = await Task.countDocuments({
+      user: userId,
+      status: "Completed",
+    });
+
+    res.json({
+      total,
+      pending,
+      inProgress,
+      completed,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching task stats", error });
+  }
+};

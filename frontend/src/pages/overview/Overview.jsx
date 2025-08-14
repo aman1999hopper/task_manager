@@ -1,74 +1,84 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   FaArrowDown,
   FaArrowUp,
   FaBoxOpen,
   FaShoppingCart,
-  FaTruck,
+  FaTruck
 } from "react-icons/fa";
-import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
 import LineChartCard from "../../components/Cards/LineChartCard";
 import PieChart from "../../components/Cards/PiChart";
 import TopProductsCard from "../../components/Cards/TopProductsCard";
-
+import { getTaskStats } from "../../../../server/controllers/taskController";
 
 const OverviewPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
-  // Sample data - replace with actual API data
   const user = useSelector((state) => state.auth.user);
 
-  const stats = [
+  const [stats, setStats] = useState({
+    total: 0,
+    pending: 0,
+    inProgress: 0,
+    completed: 0
+  });
+
+  // Fetch stats from backend
+   useEffect(() => {
+    getTaskStats().then(setStats).catch(console.error);
+  }, []);
+
+  // Card data
+  const statsData = [
     {
       id: 1,
       title: "Total Tasks",
-      amount: 5,
+      amount: stats.total,
       percentageChange: 12.5,
       icon: <FaShoppingCart className="w-8 h-8 text-blue-500" />,
     },
     {
       id: 2,
       title: "Pending Tasks",
-      amount: 3,
+      amount: stats.pending,
       percentageChange: -2.4,
       icon: <FaBoxOpen className="w-8 h-8 text-green-500" />,
     },
     {
       id: 3,
       title: "In Progress",
-      amount: 4,
+      amount: stats.inProgress,
       percentageChange: 8.2,
       icon: <FaTruck className="w-8 h-8 text-purple-500" />,
     },
     {
       id: 4,
       title: "Completed Tasks",
-      amount: 2,
+      amount: stats.completed,
       percentageChange: 19.6,
       icon: <FaArrowUp className="w-8 h-8 text-red-500" />,
     },
   ];
 
+  // Chart data
   const chartData = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
     values: [65, 59, 80, 81, 56, 55, 40],
   };
 
+  // Pie chart updates dynamically
   const pieChartData = {
-    labels: ['Pending', 'In Progress', 'Completed'],
-    values: [50, 25, 25],
+    labels: ["Pending", "In Progress", "Completed"],
+    values: [stats.pending, stats.inProgress, stats.completed],
   };
-  
-  const topProductsData = [
-    { id: 1, name: 'BAJA HOUSING', price: 112.4, lastTradePrice: 113.5, revenue: '40%' },
-    { id: 2, name: 'TATA MOTORS', price: 210.3, lastTradePrice: 215.0, revenue: '35%' },
-    { id: 3, name: 'RELIANCE', price: 1950.5, lastTradePrice: 1980.0, revenue: '25%' },
-    { id: 4, name: 'INFOSYS', price: 950.2, lastTradePrice: 960.0, revenue: '30%' },
-    { id: 5, name: 'HDFC BANK', price: 1450.0, lastTradePrice: 1465.0, revenue: '20%' },
-    { id: 6, name: 'ICICI BANK', price: 650.0, lastTradePrice: 655.0, revenue: '15%' },
-    { id: 7, name: 'WIPRO', price: 400.0, lastTradePrice: 405.0, revenue: '10%' },
-    { id: 8, name: 'TCS', price: 3200.0, lastTradePrice: 3220.0, revenue: '50%' },
-  ];
 
+  // Example top products (can be removed if not needed)
+  const topProductsData = [
+    { id: 1, name: "BAJA HOUSING", price: 112.4, lastTradePrice: 113.5, revenue: "40%" },
+    { id: 2, name: "TATA MOTORS", price: 210.3, lastTradePrice: 215.0, revenue: "35%" },
+    { id: 3, name: "RELIANCE", price: 1950.5, lastTradePrice: 1980.0, revenue: "25%" },
+    { id: 4, name: "INFOSYS", price: 950.2, lastTradePrice: 960.0, revenue: "30%" },
+  ];
 
   return (
     <div
@@ -79,8 +89,9 @@ const OverviewPage = () => {
       <h1 className="text-2xl font-bold ">Hii, {user?.name || "Guest"}</h1>
       <p className="text-gray-500 mt-4 mb-8">Take a monthly overview</p>
 
+      {/* Stats cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
-        {stats.map((stat) => (
+        {statsData.map((stat) => (
           <div
             key={stat.id}
             className="bg-white dark:bg-gray-800 dark:text-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
@@ -88,9 +99,7 @@ const OverviewPage = () => {
             <div className="flex justify-between items-start">
               <div>
                 <p className="text-gray-500 dark:text-gray-100 mb-1">{stat.title}</p>
-                <h3 className="text-2xl font-bold">
-                  {stat.amount.toLocaleString()}
-                </h3>
+                <h3 className="text-2xl font-bold">{stat.amount}</h3>
               </div>
               {stat.icon}
             </div>
@@ -113,6 +122,8 @@ const OverviewPage = () => {
           </div>
         ))}
       </div>
+
+      {/* Charts */}
       <div className="flex flex-wrap gap-4 lg:gap-6 mt-6">
         <div className="flex-1 min-w-[300px] md:w-3/5">
           <LineChartCard
@@ -128,15 +139,13 @@ const OverviewPage = () => {
           />
         </div>
       </div>
+
+      {/* Example table/card */}
       <div className="w-full mt-6">
         <TopProductsCard data={topProductsData} />
       </div>
     </div>
   );
-};
-
-OverviewPage.propTypes = {
-  isSidebarOpen: PropTypes.bool.isRequired,
 };
 
 export default OverviewPage;
