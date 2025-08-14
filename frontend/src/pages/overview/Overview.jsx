@@ -10,7 +10,7 @@ import {
 import LineChartCard from "../../components/Cards/LineChartCard";
 import PieChart from "../../components/Cards/PiChart";
 import TopProductsCard from "../../components/Cards/TopProductsCard";
-import { getTaskStats } from "../../../../server/controllers/taskController";
+import { getTaskStatsAPI } from "../../api/task";
 
 const OverviewPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
@@ -25,8 +25,10 @@ const OverviewPage = () => {
 
   // Fetch stats from backend
    useEffect(() => {
-    getTaskStats().then(setStats).catch(console.error);
-  }, []);
+  getTaskStatsAPI()
+    .then((res) => setStats(res.data))
+    .catch(console.error);
+}, []);
 
   // Card data
   const statsData = [

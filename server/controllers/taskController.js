@@ -46,19 +46,19 @@ export const createTask = async (req, res) => {
 
 export const getTaskStats = async (req, res) => {
   try {
-    const userId = req.user._id; // From authMiddleware
+    const userId = req.user._id;
 
-    const total = await Task.countDocuments({ user: userId });
+    const total = await Task.countDocuments({ createdBy: userId });
     const pending = await Task.countDocuments({
-      user: userId,
+      createdBy: userId,
       status: "Pending",
     });
     const inProgress = await Task.countDocuments({
-      user: userId,
+      createdBy: userId,
       status: "In Progress",
     });
     const completed = await Task.countDocuments({
-      user: userId,
+      createdBy: userId,
       status: "Completed",
     });
 
