@@ -44,7 +44,7 @@ const HeroSection = () => {
         {/* Right side image */}
         <div className="hidden lg:mt-0 lg:col-span-5 lg:flex justify-center">
           <img
-            src="https://upstox.com/app/themes/upstox/dist/img/home/home_banner_slide_2.png"
+            src="/assets/heroimage.jpg"
             alt="mockup"
             className="w-full"
           />
