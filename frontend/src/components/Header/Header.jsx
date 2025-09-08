@@ -46,7 +46,7 @@ const Header = () => {
     <header className="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center fixed z-50 w-full">
 
       <div>
-        <h1 className="bg-gradient-to-r from-blue-500 to-rose-600 text-transparent bg-clip-text">
+        <h1 className="bg-gradient-to-r from-blue-500 to-rose-600 text-transparent bg-clip-text text-2xl font-bold">
           Task Flow
         </h1>
       </div>
