@@ -7,6 +7,7 @@ import ManageTask from "../pages/manageTask/ManageTask.jsx";
 import taskData from "../data/TaskData.jsx";
 import CreateTaskPage from "../pages/createTask/createTaskPage.jsx";
 import ProtectedRoute from "../components/ProtectedRoutes/ProtectedRoute.jsx";
+import TeamMembersPage from "../pages/teamMembers/teamMembers.jsx";
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route path="overview" element={<OverviewPage />} />
         <Route path="task" element={<ManageTask tasks={taskData} />} />
         <Route path="createTask" element={<CreateTaskPage />} />
+        <Route path="teamMembers" element={<TeamMembersPage />} />
         <Route path="otp" element={<OTP />} />
         {/* Add other nested routes here */}
       </Route>

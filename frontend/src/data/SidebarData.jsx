@@ -29,7 +29,7 @@ export const sidebarData = [
     id: 4,
     title: "Team Members",
     icon: <Users className="w-5 h-5 text-gray-700 group-hover:text-black dark:text-gray-400 dark:group-hover:text-white" />,
-    link: "#",
+    link: "teamMembers",
   },
   {
     id: 5,
