@@ -7,3 +7,50 @@ body.dark {
     background-color: #1a202c; /* Tailwind's gray-900 */
     color: #a0aec0; /* Tailwind's gray-400 */
   }
+
+  /* Container */
+.custom-calendar {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #8b5cf6; /* purple-500 */
+  --rdp-background-color: #f3e8ff; /* purple-100 */
+  margin: 0 auto;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+  background: white;
+}
+
+/* Header */
+.custom-calendar .rdp-caption {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #6b21a8; /* purple-800 */
+  margin-bottom: 0.5rem;
+}
+
+/* Weekdays */
+.custom-calendar .rdp-head_cell {
+  font-size: 0.85rem;
+  color: #6b7280; /* gray-500 */
+  font-weight: 500;
+}
+
+/* Day cells */
+.custom-calendar .rdp-day {
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.custom-calendar .rdp-day:hover {
+  background-color: #ede9fe; /* purple-100 */
+  color: #4c1d95; /* purple-900 */
+}
+
+/* Selected day */
+.custom-calendar .rdp-day_selected,
+.custom-calendar .rdp-day_selected:hover {
+  background-color: #8b5cf6; /* purple-500 */
+  color: white;
+  font-weight: 600;
+}

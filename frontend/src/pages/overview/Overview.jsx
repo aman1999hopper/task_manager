@@ -5,10 +5,11 @@ import {
   FaArrowUp,
   FaBoxOpen,
   FaShoppingCart,
-  FaTruck
+  FaTruck,
 } from "react-icons/fa";
 import LineChartCard from "../../components/Cards/LineChartCard";
-import PieChart from "../../components/Cards/PiChart";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css"
 import TopProductsCard from "../../components/Cards/TopProductsCard";
 import { getTaskStatsAPI } from "../../api/task";
 
@@ -16,19 +17,21 @@ const OverviewPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
   const user = useSelector((state) => state.auth.user);
 
+  const [selected, setSelected] = useState(new Date());
+
   const [stats, setStats] = useState({
     total: 0,
     pending: 0,
     inProgress: 0,
-    completed: 0
+    completed: 0,
   });
 
   // Fetch stats from backend
-   useEffect(() => {
-  getTaskStatsAPI()
-    .then((res) => setStats(res.data))
-    .catch(console.error);
-}, []);
+  useEffect(() => {
+    getTaskStatsAPI()
+      .then((res) => setStats(res.data))
+      .catch(console.error);
+  }, []);
 
   // Card data
   const statsData = [
@@ -69,17 +72,41 @@ const OverviewPage = () => {
   };
 
   // Pie chart updates dynamically
-  const pieChartData = {
-    labels: ["Pending", "In Progress", "Completed"],
-    values: [stats.pending, stats.inProgress, stats.completed],
-  };
+  // const pieChartData = {
+  //   labels: ["Pending", "In Progress", "Completed"],
+  //   values: [stats.pending, stats.inProgress, stats.completed],
+  // };
 
   // Example top products (can be removed if not needed)
   const topProductsData = [
-    { id: 1, name: "BAJA HOUSING", price: 112.4, lastTradePrice: 113.5, revenue: "40%" },
-    { id: 2, name: "TATA MOTORS", price: 210.3, lastTradePrice: 215.0, revenue: "35%" },
-    { id: 3, name: "RELIANCE", price: 1950.5, lastTradePrice: 1980.0, revenue: "25%" },
-    { id: 4, name: "INFOSYS", price: 950.2, lastTradePrice: 960.0, revenue: "30%" },
+    {
+      id: 1,
+      name: "BAJA HOUSING",
+      price: 112.4,
+      lastTradePrice: 113.5,
+      revenue: "40%",
+    },
+    {
+      id: 2,
+      name: "TATA MOTORS",
+      price: 210.3,
+      lastTradePrice: 215.0,
+      revenue: "35%",
+    },
+    {
+      id: 3,
+      name: "RELIANCE",
+      price: 1950.5,
+      lastTradePrice: 1980.0,
+      revenue: "25%",
+    },
+    {
+      id: 4,
+      name: "INFOSYS",
+      price: 950.2,
+      lastTradePrice: 960.0,
+      revenue: "30%",
+    },
   ];
 
   return (
@@ -100,7 +127,9 @@ const OverviewPage = () => {
           >
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-gray-500 dark:text-gray-100 mb-1">{stat.title}</p>
+                <p className="text-gray-500 dark:text-gray-100 mb-1">
+                  {stat.title}
+                </p>
                 <h3 className="text-2xl font-bold">{stat.amount}</h3>
               </div>
               {stat.icon}
@@ -134,10 +163,12 @@ const OverviewPage = () => {
             percentage={19.6}
           />
         </div>
-        <div className="flex-1 min-w-[300px] md:w-2/5">
-          <PieChart
-            data={pieChartData}
-            title="Task Distribution"
+        <div className="bg-purple-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
+          <DayPicker
+            mode="single"
+            selected={selected}
+            onSelect={setSelected}
+            className="custom-calendar"
           />
         </div>
       </div>
