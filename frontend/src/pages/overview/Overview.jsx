@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import {
   FaArrowDown,
   FaArrowUp,
-  FaBoxOpen,
-  FaShoppingCart,
-  FaTruck,
+  FaCheckCircle,
+  FaClipboardList,
+  FaHourglassHalf,
+  FaSpinner,
 } from "react-icons/fa";
 import LineChartCard from "../../components/Cards/LineChartCard";
 import { DayPicker } from "react-day-picker";
@@ -40,28 +41,28 @@ const OverviewPage = () => {
       title: "Total Tasks",
       amount: stats.total,
       percentageChange: 12.5,
-      icon: <FaShoppingCart className="w-8 h-8 text-blue-500" />,
+      icon: <FaClipboardList className="w-6 h-6 text-blue-500" />,
     },
     {
       id: 2,
       title: "Pending Tasks",
       amount: stats.pending,
       percentageChange: -2.4,
-      icon: <FaBoxOpen className="w-8 h-8 text-green-500" />,
+      icon: <FaHourglassHalf className="w-6 h-6 text-green-500" />,
     },
     {
       id: 3,
       title: "In Progress",
       amount: stats.inProgress,
       percentageChange: 8.2,
-      icon: <FaTruck className="w-8 h-8 text-purple-500" />,
+      icon: <FaSpinner className="w-6 h-6 text-purple-500" />,
     },
     {
       id: 4,
       title: "Completed Tasks",
       amount: stats.completed,
       percentageChange: 19.6,
-      icon: <FaArrowUp className="w-8 h-8 text-red-500" />,
+      icon: <FaCheckCircle className="w-6 h-6 text-red-500" />,
     },
   ];
 
