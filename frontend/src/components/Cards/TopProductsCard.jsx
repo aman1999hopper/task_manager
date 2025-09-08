@@ -20,9 +20,9 @@ const TopProductsCard = ({ data }) => {
               <tr key={product.id} className="hover:bg-gray-50 dark:bg-gray-800 dark:text-white">
                 <td className="py-2 px-4 border-b border-gray-200">{index + 1}</td>
                 <td className="py-2 px-4 border-b border-gray-200">{product.name}</td>
-                <td className="py-2 px-4 border-b border-gray-200">{product.price.toFixed(2)}</td>
-                <td className="py-2 px-4 border-b border-gray-200">{product.lastTradePrice.toFixed(2)}</td>
-                <td className="py-2 px-4 border-b border-gray-200">{product.revenue}</td>
+                <td className="py-2 px-4 border-b border-gray-200">{product.status}</td>
+                <td className="py-2 px-4 border-b border-gray-200">{product.priority}</td>
+                <td className="py-2 px-4 border-b border-gray-200">{product.createon}</td>
               </tr>
             ))}
           </tbody>

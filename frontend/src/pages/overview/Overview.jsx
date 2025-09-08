@@ -78,34 +78,34 @@ const OverviewPage = () => {
   // };
 
   // Example top products (can be removed if not needed)
-  const topProductsData = [
+  const recentTaskData = [
     {
       id: 1,
-      name: "BAJA HOUSING",
-      price: 112.4,
-      lastTradePrice: 113.5,
-      revenue: "40%",
+      name: "UI/UX Design",
+      status: "Pending",
+      priority: "High",
+      createon: "40%",
     },
     {
       id: 2,
       name: "TATA MOTORS",
-      price: 210.3,
-      lastTradePrice: 215.0,
-      revenue: "35%",
+      status: "completed",
+      priority: "Low",
+      createon: "35%",
     },
     {
       id: 3,
       name: "RELIANCE",
-      price: 1950.5,
-      lastTradePrice: 1980.0,
-      revenue: "25%",
+      status: "In Progress",
+      priority: "Medium",
+      createon: "25%",
     },
     {
       id: 4,
-      name: "INFOSYS",
-      price: 950.2,
-      lastTradePrice: 960.0,
-      revenue: "30%",
+      name: "NavBar Items",
+      status: "completed",
+      priority: "Low",
+      createon: "30%",
     },
   ];
 
@@ -175,7 +175,7 @@ const OverviewPage = () => {
 
       {/* Example table/card */}
       <div className="w-full mt-6">
-        <TopProductsCard data={topProductsData} />
+        <TopProductsCard data={recentTaskData} />
       </div>
     </div>
   );
