@@ -58,6 +58,10 @@ const TeamMembersPage = () => {
     setIsModalOpen(false);
   };
 
+    const handleDelete = () => {
+        alert("Delete functionality to be implemented");
+    };
+
   return (
     <div
       className={`p-4 transition-all duration-300 ${
@@ -104,7 +108,10 @@ const TeamMembersPage = () => {
               <button className="text-blue-500 hover:text-blue-700">
                 <FaUserEdit />
               </button>
-              <button className="text-red-500 hover:text-red-700">
+              <button 
+              className="text-red-500 hover:text-red-700"
+              onClick={handleDelete}
+              >
                 <FaTrash />
               </button>
             </div>
