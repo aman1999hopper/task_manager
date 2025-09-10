@@ -1,4 +1,4 @@
-import Contact from "../models/contactModel.js";
+import Contact from "../models/Contact.js";
 
 // @desc    Save contact message
 // @route   POST /api/contact
