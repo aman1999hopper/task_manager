@@ -8,7 +8,7 @@ const generateToken = (userId) => {
   });
 }
 
-export const registerUser = async (req, res) => {
+export const signupUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
@@ -23,7 +23,7 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Hash password
+    // This will handle to hash password before saving to DB like this -- 1ajsjdjdj223nxmm@msmf
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Handle avatar

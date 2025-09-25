@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const OTP_DIGITS = 4; // You can change this number easily later
 
-export default function OTP() {
+export default function OTPRead() {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
 
   const [otp, setOtp] = useState(new Array(OTP_DIGITS).fill(""));

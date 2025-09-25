@@ -14,7 +14,7 @@ export const registerUser = async (name, email, password, avatar) => {
       formData.append("avatar", avatar);
     }
   
-    const res = await api.post("/auth/register", formData, {
+    const res = await api.post("/auth/signup", formData, {
       headers: {
         "Content-Type": "application/json",
       },
