@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 const CreateTaskPage = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+  const user = useSelector((state) => state.auth.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [title, setTitle] = useState("");
@@ -59,6 +60,10 @@ const CreateTaskPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (user?.role !== "admin") {
+      toast.error("Only admins can create tasks.");
+      return;
+    }
     const newTask = {
       title,
       description,
@@ -320,9 +325,15 @@ const CreateTaskPage = () => {
           Cancel
         </button>
         <button
-          type="submit"
-          onClick={handleSubmit}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          type="button"
+          disabled={user?.role !== "admin"}
+          onClick={handleSubmit}  
+          className={`px-4 py-2 rounded text-white ${
+            user?.role === "admin"
+              ? "bg-blue-500 hover:bg-blue-600"
+              : "bg-gray-400 cursor-not-allowed"
+          }`}
+          title={user?.role !== "admin" ? "Only admins can create tasks" : ""}
         >
           Create Task
         </button>

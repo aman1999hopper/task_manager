@@ -18,7 +18,7 @@ const ManageTask = () => {
     setTimeout(() => {
       getTasksAPI()
         .then((res) => {
-          console.log("Manage task......",res.data);  
+          console.log("Manage task......", res.data);
           setTasks(res.data);
           setLoading(false); // 👈 Stop loader after data is loaded
         })
@@ -26,7 +26,7 @@ const ManageTask = () => {
           console.error(err);
           setLoading(false); // 👈 Still stop loader on error
         });
-    }, 5000); // 1-second delay
+    }, 2000); // 2-second delay
   }, []);
 
   const handleDelete = (id) => {
@@ -128,7 +128,11 @@ const ManageTask = () => {
                 <div
                   className="bg-blue-600 h-2.5 rounded-full"
                   style={{
-                    width: `${(task.completedTasks / task.totalTasks) * 100}%`,
+                    width: `${
+                      task.totalTasks > 0
+                        ? (task.completedTasks / task.totalTasks) * 100
+                        : 0
+                    }%`,
                   }}
                 ></div>
               </div>
