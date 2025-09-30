@@ -61,13 +61,13 @@ const ContactUsSection = () => {
             <div className="flex items-center space-x-4">
               <i className="fas fa-phone-alt text-blue-500"></i>
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                +1 (234) 567-890
+                9829315931
               </p>
             </div>
             <div className="flex items-center space-x-4">
               <i className="fas fa-envelope text-blue-500"></i>
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                contact@stockheaven.com
+                aman@stockheaven.com
               </p>
             </div>
             <div className="flex items-center space-x-4">
