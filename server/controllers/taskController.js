@@ -1,4 +1,5 @@
 import Task from "../models/Task.js";
+import mongoose from "mongoose";
 
 // Get all tasks
 export const getTasks = async (req, res) => {
@@ -41,6 +42,42 @@ export const createTask = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Delete a task
+
+export const deleteTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({ message: "Invalid task id" });
+    }
+
+    const task = await Task.findById(id);
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    // Optional: ownership check
+    if (
+      req.user?.userId &&
+      task.userId.toString() !== req.user.userId &&
+      req.user.role !== "admin"
+    ) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    // Hard delete:
+    await Task.findByIdAndDelete(id);
+    // OR soft-delete:
+    // await Task.findByIdAndUpdate(id, { deleted: true, deletedAt: new Date() });
+
+    return res.status(200).json({ message: "Task deleted", id });
+  } catch (err) {
+    console.error("Delete task error:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 

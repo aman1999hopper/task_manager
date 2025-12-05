@@ -6,6 +6,8 @@ dotenv.config();
 import authRoutes from "./routes/authRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js"
+import memberRoutes from "./routes/fetchMembersRoutes.js";
+
 
 const app = express();
 connectDB();
@@ -22,6 +24,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api", memberRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -16,4 +16,5 @@ API.interceptors.request.use((req) => {
 
 export const createTaskAPI = (taskData) => API.post('/tasks', taskData);
 export const getTasksAPI = () => API.get('/tasks');
+export const deleteTaskAPI = (id) => API.delete(`/tasks/${id}`);
 export const getTaskStatsAPI = () => API.get('/tasks/stats');

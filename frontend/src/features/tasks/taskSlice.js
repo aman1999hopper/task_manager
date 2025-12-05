@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createTaskAPI, getTasksAPI } from '../../api/task.js';
+import { createTaskAPI, getTasksAPI, deleteTaskAPI } from '../../api/task.js';
 
 export const createTask = createAsyncThunk('tasks/create', async (taskData, thunkAPI) => {
   try {
@@ -16,6 +16,15 @@ export const getTasks = createAsyncThunk('tasks/getAll', async (_, thunkAPI) => 
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response?.data?.message || 'Fetch failed');
+  }
+});
+
+export const deleteTask = createAsyncThunk('tasks/delete', async (taskId, thunkAPI) => {
+  try {
+    await deleteTaskAPI(taskId);
+    return taskId;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || 'Delete failed');
   }
 });
 

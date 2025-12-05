@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Avatar from "@mui/material/Avatar";
-import { getTasksAPI } from "../../api/task";
+import { getTasksAPI, deleteTaskAPI } from "../../api/task";
 import { toast } from "react-toastify";
 import SkeletonCard from "../../components/skaletonCard.jsx";
 
@@ -29,10 +29,15 @@ const ManageTask = () => {
     }, 2000); // 2-second delay
   }, []);
 
-  const handleDelete = (id) => {
-    const newCrads = tasks.filter((_, index) => index !== id);
-    setTasks(newCrads);
-    toast.success("Task deleted successfully");
+  const handleDelete = async (id) => {
+    try {
+      await deleteTaskAPI(id);
+      setTasks(tasks.filter((task) => task._id !== id)); // frontend state update
+      toast.success("Task deleted successfully");
+    } catch (err) {
+      console.error("Delete failed:", err);
+      toast.error("Failed to delete task");
+    }
   };
 
   const filteredTasks = tasks.filter((task) =>
@@ -184,8 +189,8 @@ const ManageTask = () => {
                   Edit
                 </button>
                 <button
+                  onClick={() => handleDelete(task._id)}
                   className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-                  onClick={handleDelete}
                 >
                   Delete
                 </button>
