@@ -6,8 +6,6 @@
 
 🔗 Live Website: https://task-manager-one-henna.vercel.app/
 
-![Task Dashboard](./screenshots/dashboard.png)
-
 ## 🚀 Features
 
 - 📊 Real-time Task data
