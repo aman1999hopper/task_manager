@@ -38,6 +38,9 @@
 ### Dashboard Page
 ![DashBoard](./frontend/src/assets/dashboard.png)
 
+### Login Page
+![Login](./frontend/src/assets/task_login.png)
+
 ### Mobile Responsive
 ![Mobile View](./screenshots/mobile.png)
 
