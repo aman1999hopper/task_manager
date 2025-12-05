@@ -1,6 +1,10 @@
 # Task_manager_app
 
-# Taskify
+# Taskflow
+
+🌐 Live Demo
+
+🔗 Live Website: https://task-manager-one-henna.vercel.app/
 
 ![Task Dashboard](./screenshots/dashboard.png)
 
@@ -46,4 +50,12 @@
 
 ## 🛠️ Installation Steps
 
-1. Clone the repository
+1. git clone https://github.com/aman1999hopper/task_manager.git
+   cd taskify
+
+2. Install Dependencies : 
+  -cd frontend
+  -npm install
+
+3. cd ../backend
+  npm install
